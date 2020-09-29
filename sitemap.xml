@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://blog.kyrios.cn/about/</loc>
+    
+    <lastmod>2020-09-29</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://blog.kyrios.cn/new-hexo-blog/</loc>
     
     <lastmod>2020-09-29</lastmod>
@@ -94,13 +101,6 @@
   
   <url>
     <loc>https://blog.kyrios.cn/aes-cbc-byte-flipping-attack/</loc>
-    
-    <lastmod>2020-09-12</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://blog.kyrios.cn/about/</loc>
     
     <lastmod>2020-09-12</lastmod>
     
