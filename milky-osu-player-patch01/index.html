@@ -31,7 +31,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://blog.kyrios.cn/milky-osu-player-patch01/img/osu_player_preview.png">
 <meta property="article:published_time" content="2020-10-10T14:20:44.000Z">
-<meta property="article:modified_time" content="2020-10-11T17:52:30.298Z">
+<meta property="article:modified_time" content="2020-10-12T16:53:46.302Z">
 <meta property="article:author" content="Kyr1os">
 <meta property="article:tag" content="Toy">
 <meta property="article:tag" content="Dev">
@@ -206,7 +206,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-10-12 01:52:30" itemprop="dateModified" datetime="2020-10-12T01:52:30+08:00">2020-10-12</time>
+                <time title="Modified: 2020-10-13 00:53:46" itemprop="dateModified" datetime="2020-10-13T00:53:46+08:00">2020-10-13</time>
               </span>
 
           
@@ -251,12 +251,16 @@
 <figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> ordered = SoundElements.OrderBy(k =&gt; k.Offset).ToArray();</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> last9Element = ordered.Skip(ordered.Length - <span class="number">9</span>).ToArray();</span><br><span class="line"><span class="comment">// OsuPlayer.Media.Audio\Player\Subchannels\MultiElementsChannel.cs line 99</span></span><br><span class="line"><span class="keyword">var</span> max = TimeSpan.FromMilliseconds(last9Element.Length == <span class="number">0</span> ? <span class="number">0</span> : last9Element.Max(k =&gt; k.NearlyPlayEndTime));</span><br><span class="line">Duration = MathEx.Max(</span><br><span class="line">    TimeSpan.FromMilliseconds(SoundElements.Count == <span class="number">0</span> ? <span class="number">0</span> : SoundElements.Max(k =&gt; k.Offset)), max);</span><br></pre></td></tr></table></figure>
 <p>这里很明显是在引用<code>NearlyPlayEndTime</code>之前没有对<code>ControlType</code>做判断，故补上。</p>
 <hr />
+<h3 id="todo">TODO</h3>
 <p>还发现了几个报错下周再看吧。先记录一下</p>
 <ul>
 <li>error while loading 884669 Aleph-0</li>
 <li>error while loading 3756 osu! tutorial</li>
 <li>error while loading 118 Survival dAnce</li>
 <li>error while loading 1139736 Koi Wa Chaos no Shimobenari</li>
+<li>error while loading 942641 Accumula Town</li>
+<li><p>error while loading 153887 Odoru Mizushibuki</p></li>
+<li><p>stuck while loading 999586 Ryokugan no Jealousy</p></li>
 </ul>
 
     </div>
@@ -283,8 +287,8 @@
       <i class="fa fa-chevron-left"></i> 博客迁移到Hexo
     </a></div>
       <div class="post-nav-item">
-    <a href="/b-autumn-2020-banner/" rel="next" title="某网站2020秋季banner的渲染问题">
-      某网站2020秋季banner的渲染问题 <i class="fa fa-chevron-right"></i>
+    <a href="/b-autumn-2020-banner/" rel="next" title="某站20秋banner在Firefox上的渲染">
+      某站20秋banner在Firefox上的渲染 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -345,7 +349,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#hitsound-loading-error"><span class="nav-number">1.</span> <span class="nav-text">Hitsound Loading Error</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#soundelement-unexpected-reference"><span class="nav-number">2.</span> <span class="nav-text">SoundElement Unexpected Reference</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#hitsound-loading-error"><span class="nav-number">1.</span> <span class="nav-text">Hitsound Loading Error</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#soundelement-unexpected-reference"><span class="nav-number">2.</span> <span class="nav-text">SoundElement Unexpected Reference</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#todo"><span class="nav-number">3.</span> <span class="nav-text">TODO</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -368,7 +372,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-count">18</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
