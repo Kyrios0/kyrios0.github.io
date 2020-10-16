@@ -31,7 +31,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://blog.kyrios.cn/milky-osu-player-patch01/img/osu_player_preview.png">
 <meta property="article:published_time" content="2020-10-10T14:20:44.000Z">
-<meta property="article:modified_time" content="2020-10-12T16:53:46.302Z">
+<meta property="article:modified_time" content="2020-10-16T15:16:54.755Z">
 <meta property="article:author" content="Kyr1os">
 <meta property="article:tag" content="Toy">
 <meta property="article:tag" content="Dev">
@@ -206,7 +206,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-10-13 00:53:46" itemprop="dateModified" datetime="2020-10-13T00:53:46+08:00">2020-10-13</time>
+                <time title="Modified: 2020-10-16 23:16:54" itemprop="dateModified" datetime="2020-10-16T23:16:54+08:00">2020-10-16</time>
               </span>
 
           
@@ -232,7 +232,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">[00:23:26] Milky.OsuPlayer.Media.Audio.ObservablePlayController+ObservablePlayController_LoadError: Load error while loading beatmap: J:\Games\Base\OSU!\Songs\351630 kradness&amp;Reol - Remote Control\kradness&amp;Reol - Remote Control (Taeyang) [Max Control!].osu</span><br><span class="line">System.NullReferenceException: 未将对象引用设置到对象的实例。</span><br><span class="line">   在 Milky.OsuPlayer.Media.Audio.Player.Subchannels.SoundElement.get_NearlyPlayEndTime() 位置 C:\Users\Administrator\Documents\GitHub\Osu-Player\OsuPlayer.Media.Audio\Player\Subchannels\SoundElement.cs:行号 13</span><br><span class="line">   在 Milky.OsuPlayer.Media.Audio.Player.Subchannels.MultiElementsChannel.&lt;&gt;c.&lt;Initialize&gt;b__46_2(SoundElement k) 位置 C:\Users\Administrator\Documents\GitHub\Osu-Player\OsuPlayer.Media.Audio\Player\Subchannels\MultiElementsChannel.cs:行号 99</span><br><span class="line">   在 System.Linq.Enumerable.WhereSelectArrayIterator&#96;2.MoveNext()</span><br><span class="line">   在 System.Linq.Enumerable.Max(IEnumerable&#96;1 source)</span><br><span class="line">   在 System.Linq.Enumerable.Max[TSource](IEnumerable&#96;1 source, Func&#96;2 selector)</span><br><span class="line">   在 Milky.OsuPlayer.Media.Audio.Player.Subchannels.MultiElementsChannel.&lt;Initialize&gt;d__46.MoveNext() 位置 C:\Users\Administrator\Documents\GitHub\Osu-Player\OsuPlayer.Media.Audio\Player\Subchannels\MultiElementsChannel.cs:行号 99</span><br><span class="line">--- 引发异常的上一位置中堆栈跟踪的末尾 ---</span><br><span class="line">   在 System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)</span><br><span class="line">   在 System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)</span><br><span class="line">   在 System.Runtime.CompilerServices.ConfiguredTaskAwaitable.ConfiguredTaskAwaiter.GetResult()</span><br><span class="line">   在 Milky.OsuPlayer.Media.Audio.OsuMixPlayer.&lt;InnerLoad&gt;d__26.MoveNext() 位置 C:\Users\Administrator\Documents\GitHub\Osu-Player\OsuPlayer.Media.Audio\OsuMixPlayer.cs:行号 95</span><br><span class="line">--- 引发异常的上一位置中堆栈跟踪的末尾 ---</span><br><span class="line">   在 System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)</span><br><span class="line">   在 System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)</span><br><span class="line">   在 System.Runtime.CompilerServices.ConfiguredTaskAwaitable.ConfiguredTaskAwaiter.GetResult()</span><br><span class="line">   在 Milky.OsuPlayer.Media.Audio.OsuMixPlayer.&lt;Initialize&gt;d__24.MoveNext() 位置 C:\Users\Administrator\Documents\GitHub\Osu-Player\OsuPlayer.Media.Audio\OsuMixPlayer.cs:行号 65</span><br><span class="line">--- 引发异常的上一位置中堆栈跟踪的末尾 ---</span><br><span class="line">   在 System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)</span><br><span class="line">   在 System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)</span><br><span class="line">   在 System.Runtime.CompilerServices.ConfiguredTaskAwaitable.ConfiguredTaskAwaiter.GetResult()</span><br><span class="line">   在 Milky.OsuPlayer.Media.Audio.ObservablePlayController.&lt;LoadAsync&gt;d__59.MoveNext() 位置 C:\Users\Administrator\Documents\GitHub\Osu-Player\OsuPlayer.Media.Audio\ObservablePlayController.cs:行号 262</span><br></pre></td></tr></table></figure>
 <p>定位了一下这个问题，播放器在载入<a target="_blank" rel="noopener" href="https://osu.ppy.sh/beatmapsets/351630">リモコン</a>这个铺面的时候可以复现bug，断点在<code>OsuPlayer.Media.Audio\Player\Subchannels\SoundElement.cs line 13</code></p>
 <figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// OsuPlayer.Media.Audio\Player\Subchannels\SoundElement.cs line 13</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">double</span> NearlyPlayEndTime =&gt; GetCachedSoundAsync().Result.Duration.TotalMilliseconds + Offset;</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="comment">// OsuPlayer.Media.Audio\Player\Subchannels\SoundElement.cs line 20</span></span><br><span class="line"><span class="function"><span class="keyword">internal</span> <span class="keyword">async</span> Task&lt;CachedSound&gt; <span class="title">GetCachedSoundAsync</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>        &#123;</span><br><span class="line">            <span class="keyword">if</span> (_cachedSound != <span class="literal">null</span>)</span><br><span class="line">                <span class="keyword">return</span> _cachedSound;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">var</span> result = <span class="keyword">await</span> CachedSound.GetOrCreateCacheSound(FilePath).ConfigureAwait(<span class="literal">false</span>);</span><br><span class="line">            _cachedSound = result;</span><br><span class="line">            <span class="keyword">return</span> result;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
-<p>此时<code>FilePath</code>为<code>"OsuPlayer.Wpf\bin\Debug\default\normal-hitnormal2.wav"</code>，这个路径在本地缓存中未命中。</p>
+<p>这段代码是对Hitsound的一个缓存机制的一部分（我觉得这个缓存优化很妙，避免了很多重复的对FS的请求）。调试中<code>FilePath</code>为<code>"OsuPlayer.Wpf\bin\Debug\default\normal-hitnormal2.wav"</code>，这个路径在本地缓存中未命中。</p>
 <p>定位到<code>AnalyzeHitsoundFiles</code>函数： <figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// OsuPlayer.Media.Audio\HitsoundChannel.cs line 222</span></span><br><span class="line"><span class="keyword">private</span> IEnumerable&lt;(<span class="keyword">string</span>, HitsoundType)&gt; AnalyzeHitsoundFiles(...)</span><br><span class="line">&#123;</span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line">    <span class="comment">// OsuPlayer.Media.Audio\HitsoundChannel.cs line 262</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; tuples.Count; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">var</span> fileNameWithoutIndex = tuples[i].Item1;</span><br><span class="line">        <span class="keyword">var</span> hitsoundType = tuples[i].Item2;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> baseIndex = hitObject.CustomIndex &gt; <span class="number">0</span> ? hitObject.CustomIndex : timingPoint.Track;</span><br><span class="line">        <span class="keyword">string</span> indexStr = baseIndex &gt; <span class="number">1</span> ? baseIndex.ToString() : <span class="string">&quot;&quot;</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">var</span> fileNameWithoutExt = fileNameWithoutIndex + indexStr;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">string</span> filePath;</span><br><span class="line">        <span class="keyword">if</span> (timingPoint.Track == <span class="number">0</span>)</span><br><span class="line">            filePath = Path.Combine(Domain.DefaultPath, fileNameWithoutExt + AudioPlaybackEngine.WavExtension);</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (waves.Contains(fileNameWithoutExt))</span><br><span class="line">            filePath = _player.GetFileUntilFind(_sourceFolder, fileNameWithoutExt);</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            filePath = Path.Combine(Domain.DefaultPath, fileNameWithoutExt + AudioPlaybackEngine.WavExtension);</span><br><span class="line"></span><br><span class="line">        tuples[i] = (filePath, hitsoundType);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> tuples;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure> 这部分代码遵循的是<a target="_blank" rel="noopener" href="https://osu.ppy.sh/help/wiki/osu!_File_Formats/Osu_(file_format)#hitsounds">Wiki里对hitsounds的一些约定</a>，这里同时也描述了osu对于hitsound的加载模式:</p>
 <blockquote>
 <p>The sound file is loaded from the first of the following directories that contains a matching filename:</p>
@@ -251,16 +251,53 @@
 <figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> ordered = SoundElements.OrderBy(k =&gt; k.Offset).ToArray();</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> last9Element = ordered.Skip(ordered.Length - <span class="number">9</span>).ToArray();</span><br><span class="line"><span class="comment">// OsuPlayer.Media.Audio\Player\Subchannels\MultiElementsChannel.cs line 99</span></span><br><span class="line"><span class="keyword">var</span> max = TimeSpan.FromMilliseconds(last9Element.Length == <span class="number">0</span> ? <span class="number">0</span> : last9Element.Max(k =&gt; k.NearlyPlayEndTime));</span><br><span class="line">Duration = MathEx.Max(</span><br><span class="line">    TimeSpan.FromMilliseconds(SoundElements.Count == <span class="number">0</span> ? <span class="number">0</span> : SoundElements.Max(k =&gt; k.Offset)), max);</span><br></pre></td></tr></table></figure>
 <p>这里很明显是在引用<code>NearlyPlayEndTime</code>之前没有对<code>ControlType</code>做判断，故补上。</p>
 <hr />
-<h3 id="todo">TODO</h3>
-<p>还发现了几个报错下周再看吧。先记录一下</p>
+<h3 id="background-load-error">Background Load Error</h3>
+<p>修bug的第二天，原项目代码比较熟了写fix就很快，下面写的会简单一点。</p>
+<p>error while loading <a target="_blank" rel="noopener" href="https://osu.ppy.sh/beatmapsets/6687#osu/29956">6687 World is Mine</a>。定位发现这个图的视频在<code>.osu</code>中的标签是<code>1</code>而不是<code>Video</code>，查了<a target="_blank" rel="noopener" href="https://osu.ppy.sh/help/wiki/osu!_File_Formats/Osu_(file_format)#videos">Wiki</a>发现这是合法的：</p>
+<blockquote>
+<p>Video may be replaced by 1.</p>
+</blockquote>
+<p>故补上。</p>
+<h3 id="storyboard-parse-error">Storyboard Parse Error</h3>
+<p>OSharp.Story报错，查了一下是解析一个<a target="_blank" rel="noopener" href="https://osu.ppy.sh/help/wiki/Storyboard_Scripting/Objects">Storyboard Object</a>的时候出了问题，查了一下资料，发现少处理了一个缺省参数：</p>
+<blockquote>
+<p>(looptype): LoopForever (<strong>default if you leave this value off</strong>; the animation will return to the first frame after finishing the last frame)</p>
+</blockquote>
+<p>故补上。</p>
+<h3 id="folder-name-error">Folder Name Error</h3>
+<p>智障Windows。</p>
+<p><a target="_blank" rel="noopener" href="https://osu.ppy.sh/beatmapsets/153887#osu/378126">714239 More One Night</a> 这张图的文件夹结尾被解析出来是个空格，加个<code>Trim()</code>即可。</p>
+<p>关于文件夹末尾空格和<code>\\?\</code>的东西我投稿到tg了。</p>
+<hr />
+<h3 id="done">Done</h3>
 <ul>
-<li>error while loading 884669 Aleph-0</li>
-<li>error while loading 3756 osu! tutorial</li>
+<li><del>error while loading 6687 World is Mine</del></li>
+<li><p><del>error while loading 942641 Accumula Town</del></p></li>
+<li><del>error while loading 153887 Odoru Mizushibuki</del></li>
+<li><p><del>error while loading 714239 More One Night</del></p></li>
+<li><p>error while loading 92179 Romeo and Cinderella</p>
+<p>解析铺面的时候没有处理<code>[Colours]: SliderBorder</code>，没空去处理那个<code>KeyValueFlag</code>不一致的问题，提了个issue。</p></li>
+<li><p>error while loading 3756 osu! tutorial</p>
+<p>缺省参数修了，还有一个错误引用不知道为什么报出来的暂时不想修</p></li>
 <li>error while loading 118 Survival dAnce</li>
-<li>error while loading 1139736 Koi Wa Chaos no Shimobenari</li>
-<li>error while loading 942641 Accumula Town</li>
-<li><p>error while loading 153887 Odoru Mizushibuki</p></li>
+<li><p>error while loading 243 Marisa wa Taihen na Mono wo Nusunde Ikimashita</p>
+<p>osu file版本过低，不想修</p></li>
+<li><p>error while loading 1139736 Koi Wa Chaos no Shimobenari</p>
+<p>有一个用LAME转出来的wav文件头是ID3，OSU能播但是OSU-Player解析失败，音频库的问题不想修</p></li>
+</ul>
+<hr />
+<h3 id="pending">Pending</h3>
+<ul>
+<li><p>error while loading 884669 Aleph-0</p></li>
+<li><p>error while loading Acid Rain</p></li>
 <li><p>stuck while loading 999586 Ryokugan no Jealousy</p></li>
+</ul>
+<hr />
+<ul>
+<li><p>preload</p></li>
+<li><p>can't stop slider</p></li>
+<li><p>support taiko</p></li>
+<li><p>video won't be played in mini-mode</p></li>
 </ul>
 
     </div>
@@ -349,7 +386,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#hitsound-loading-error"><span class="nav-number">1.</span> <span class="nav-text">Hitsound Loading Error</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#soundelement-unexpected-reference"><span class="nav-number">2.</span> <span class="nav-text">SoundElement Unexpected Reference</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#todo"><span class="nav-number">3.</span> <span class="nav-text">TODO</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#hitsound-loading-error"><span class="nav-number">1.</span> <span class="nav-text">Hitsound Loading Error</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#soundelement-unexpected-reference"><span class="nav-number">2.</span> <span class="nav-text">SoundElement Unexpected Reference</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#background-load-error"><span class="nav-number">3.</span> <span class="nav-text">Background Load Error</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#storyboard-parse-error"><span class="nav-number">4.</span> <span class="nav-text">Storyboard Parse Error</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#folder-name-error"><span class="nav-number">5.</span> <span class="nav-text">Folder Name Error</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#done"><span class="nav-number">6.</span> <span class="nav-text">Done</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pending"><span class="nav-number">7.</span> <span class="nav-text">Pending</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
