@@ -33,7 +33,7 @@
 <meta property="og:image" content="https://blog.kyrios.cn/xctf-2018-final-wp/img/railgun_uaf.png">
 <meta property="og:image" content="https://blog.kyrios.cn/xctf-2018-final-wp/img/railgun_comment.png">
 <meta property="article:published_time" content="2018-11-05T07:09:20.000Z">
-<meta property="article:modified_time" content="2020-10-11T09:28:44.257Z">
+<meta property="article:modified_time" content="2020-11-07T08:08:33.221Z">
 <meta property="article:author" content="Kyr1os">
 <meta property="article:tag" content="Crypto">
 <meta property="article:tag" content="AES">
@@ -209,7 +209,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-10-11 17:28:44" itemprop="dateModified" datetime="2020-10-11T17:28:44+08:00">2020-10-11</time>
+                <time title="Modified: 2020-11-07 16:08:33" itemprop="dateModified" datetime="2020-11-07T16:08:33+08:00">2020-11-07</time>
               </span>
 
           
@@ -242,13 +242,13 @@
 <h3 id="rsa-lsb-oracle-attack">RSA LSB Oracle Attack</h3>
 <p>之后进入密码学时间</p>
 <p>已知n, e;</p>
-<p>flag_cipher = pow(flag+padding, e, n)</p>
+<p>flagCipher = pow(flag+padding, e, n)</p>
 <p>击杀Boss可以获得 AES_ecb(pow(input, d, n) % 16, Boss)</p>
 <p>因为Boss9已经被控制了，所以相当于返回的是pow(input, d, n) % 16</p>
 <p><strong>使用RSA LSB Oracle Attack</strong></p>
 <p>假设攻击者已知x个最后半字节，设未知部分为a，已知部分是b，则有<span class="math inline">\(f = a * 16^{x} + b\)</span></p>
 <p>令<span class="math inline">\(y = 16^{-x}\ mod\ n, Y = y^{e}\ mod\ n\)</span></p>
-<p>输入<span class="math inline">\(flag_cipher * Y\)</span>， 则会返回<span class="math inline">\(fy = a + b * 16^{-x}\ mod\ n\ mod\ 16\)</span></p>
+<p>输入<span class="math inline">\(flagCipher * Y\)</span>， 则会返回<span class="math inline">\(fy = a + b * 16^{-x}\ mod\ n\ mod\ 16\)</span></p>
 <p>因为<span class="math inline">\(b * 16^{-x}\ mod\ 16\)</span>已知，所以可以求出<span class="math inline">\(a\ mod\ 16\)</span></p>
 <h3 id="exploit">Exploit</h3>
 <p>利用UAF控制Boss9的内容，然后用RSA LSB Oracle Attack逐半字节攻击出flag</p>
