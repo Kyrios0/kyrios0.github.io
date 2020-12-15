@@ -32,7 +32,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://blog.kyrios.cn/milky-osu-player-patch01/img/osu_player_preview.png">
 <meta property="article:published_time" content="2020-10-10T14:20:44.000Z">
-<meta property="article:modified_time" content="2020-12-04T19:43:19.639Z">
+<meta property="article:modified_time" content="2020-12-14T18:03:23.853Z">
 <meta property="article:author" content="Kyr1os">
 <meta property="article:tag" content="Toy">
 <meta property="article:tag" content="Dev">
@@ -207,7 +207,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-12-05 03:43:19" itemprop="dateModified" datetime="2020-12-05T03:43:19+08:00">2020-12-05</time>
+                <time title="Modified: 2020-12-15 02:03:23" itemprop="dateModified" datetime="2020-12-15T02:03:23+08:00">2020-12-15</time>
               </span>
 
           
@@ -275,14 +275,10 @@
 <p>在源码中加了几行log，发现主要是由于位置计算的实现有问题导致的。位置计算的作用是判断当迷你窗口到屏幕边缘是判断是否隐藏和往哪个方向隐藏。在获取当前窗口位置时，模块假设此时鼠标一定在拖动窗口，所以首先获取当前鼠标位置，然后获取鼠标停留窗口的区域。但是这个前提是错误的，如果原本迷你窗口的位置就已经在屏幕边缘了，然后用户在迷你模式和正常模式之间来回切换，此时之前提到的前提便多半不再成立，位置获取出错会导致隐藏动画出错。</p>
 <p>写了个很保守的fix，对当前窗口区域持久化，将这个变量的值在退出时写到配置文件里，并于启动时自动加载。</p>
 <h3 id="unexcepted-hotkey-trigger">Unexcepted Hotkey Trigger</h3>
-<p>播放器用着用着音量会自己增加，调试了一下发现是个很诡异的bug。在音量+快捷键未设置以及音量+之前的快捷键都已设置的情况下，将当前窗口从Osu-Player切到RDP会触发音量+快捷键。如果此时设置音量+，则切换窗口的动作就会触发音量-。也就是说把窗口从Osu-Player切换到RDP的这个动作会触发第一个未设置的快捷键。查了一下代码，发现未设置的快捷键都为的Keys.None，按理来说确实触发不到。不知道这个None的信号是哪来的，写了个fix判断当前绑定快捷键为None时不注册回调函数。</p>
+<p>播放器用着用着音量会自己增加，调试了一下发现是个很诡异的bug。在音量+快捷键未设置以及音量+之前的快捷键都已设置的情况下，将当前窗口从Osu-Player切到RDP会触发音量+快捷键。如果此时设置音量+，则切换窗口的动作就会触发音量-。也就是说把窗口从Osu-Player切换到RDP的这个动作会触发第一个未设置的快捷键。查了一下代码，发现未设置的快捷键的值都为<code>Keys.None</code>，按理来说确实触发不到。不知道这个None的信号是哪来的，写了个fix判断当前绑定快捷键为None时不注册回调函数。</p>
 <hr />
-<h3 id="done">Done</h3>
+<h3 id="analyzed">Analyzed</h3>
 <ul>
-<li><del>error while loading 6687 World is Mine</del></li>
-<li><p><del>error while loading 942641 Accumula Town</del></p></li>
-<li><del>error while loading 153887 Odoru Mizushibuki</del></li>
-<li><p><del>error while loading 714239 More One Night</del></p></li>
 <li><p>error while loading 92179 Romeo and Cinderella</p>
 <p>解析铺面的时候没有处理<code>[Colours]: SliderBorder</code>，没空去处理那个<code>KeyValueFlag</code>不一致的问题，提了个issue。</p></li>
 <li><p>error while loading 3756 osu! tutorial</p>
@@ -297,6 +293,7 @@
 <h3 id="pending">Pending</h3>
 <ul>
 <li><p>error while loading 884669 Aleph-0</p></li>
+<li><p>error while loading 92179 Romeo and Cinederella</p></li>
 <li><p>error while loading Acid Rain</p></li>
 <li><p>stuck while loading 999586 Ryokugan no Jealousy</p></li>
 <li><p>can't stop slider</p></li>
@@ -332,8 +329,8 @@
       <i class="fa fa-chevron-left"></i> 博客迁移到Hexo
     </a></div>
       <div class="post-nav-item">
-    <a href="/b-autumn-2020-banner/" rel="next" title="某站20秋banner在Firefox上的渲染">
-      某站20秋banner在Firefox上的渲染 <i class="fa fa-chevron-right"></i>
+    <a href="/b-autumn-2020-banner/" rel="next" title="某站banner在Firefox上的渲染">
+      某站banner在Firefox上的渲染 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -394,7 +391,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#hitsound-loading-error"><span class="nav-number">1.</span> <span class="nav-text">Hitsound Loading Error</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#soundelement-unexpected-reference"><span class="nav-number">2.</span> <span class="nav-text">SoundElement Unexpected Reference</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#background-load-error"><span class="nav-number">3.</span> <span class="nav-text">Background Load Error</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#storyboard-parse-error"><span class="nav-number">4.</span> <span class="nav-text">Storyboard Parse Error</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#folder-name-error"><span class="nav-number">5.</span> <span class="nav-text">Folder Name Error</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#miniplayer-hiding-error"><span class="nav-number">6.</span> <span class="nav-text">MiniPlayer Hiding Error</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#unexcepted-hotkey-trigger"><span class="nav-number">7.</span> <span class="nav-text">Unexcepted Hotkey Trigger</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#done"><span class="nav-number">8.</span> <span class="nav-text">Done</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pending"><span class="nav-number">9.</span> <span class="nav-text">Pending</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#hitsound-loading-error"><span class="nav-number">1.</span> <span class="nav-text">Hitsound Loading Error</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#soundelement-unexpected-reference"><span class="nav-number">2.</span> <span class="nav-text">SoundElement Unexpected Reference</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#background-load-error"><span class="nav-number">3.</span> <span class="nav-text">Background Load Error</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#storyboard-parse-error"><span class="nav-number">4.</span> <span class="nav-text">Storyboard Parse Error</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#folder-name-error"><span class="nav-number">5.</span> <span class="nav-text">Folder Name Error</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#miniplayer-hiding-error"><span class="nav-number">6.</span> <span class="nav-text">MiniPlayer Hiding Error</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#unexcepted-hotkey-trigger"><span class="nav-number">7.</span> <span class="nav-text">Unexcepted Hotkey Trigger</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#analyzed"><span class="nav-number">8.</span> <span class="nav-text">Analyzed</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pending"><span class="nav-number">9.</span> <span class="nav-text">Pending</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -410,7 +407,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">18</span>
+          <span class="site-state-item-count">19</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
