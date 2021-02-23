@@ -23,22 +23,20 @@
     var CONFIG = {"hostname":"blog.kyrios.cn","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="某网站20年🍁秋季的banner设计的挺好看的，然而在Firefox上的实际动画渲染效果却一言难尽，所以自己尝试摸索了一下。">
+  <meta name="description" content="对社区生态的现状的随想">
 <meta property="og:type" content="article">
-<meta property="og:title" content="某站banner在Firefox上的渲染">
-<meta property="og:url" content="https://blog.kyrios.cn/b-autumn-2020-banner/">
+<meta property="og:title" content="虚与实的幻界">
+<meta property="og:url" content="https://blog.kyrios.cn/thinking-about-community-ecosystem/">
 <meta property="og:site_name" content="Kyr1os&#39; Blog">
-<meta property="og:description" content="某网站20年🍁秋季的banner设计的挺好看的，然而在Firefox上的实际动画渲染效果却一言难尽，所以自己尝试摸索了一下。">
+<meta property="og:description" content="对社区生态的现状的随想">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-10-11T10:25:44.000Z">
-<meta property="article:modified_time" content="2021-01-06T06:50:45.356Z">
+<meta property="article:published_time" content="2021-02-22T19:00:44.000Z">
+<meta property="article:modified_time" content="2021-02-23T16:43:37.750Z">
 <meta property="article:author" content="Kyr1os">
-<meta property="article:tag" content="Dev">
-<meta property="article:tag" content="Frontend">
-<meta property="article:tag" content="GPU">
+<meta property="article:tag" content="Essay">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://blog.kyrios.cn/b-autumn-2020-banner/">
+<link rel="canonical" href="https://blog.kyrios.cn/thinking-about-community-ecosystem/">
 
 
 <script id="page-configurations">
@@ -51,7 +49,7 @@
   };
 </script>
 
-  <title>某站banner在Firefox上的渲染 | Kyr1os' Blog</title>
+  <title>虚与实的幻界 | Kyr1os' Blog</title>
   
 
 
@@ -175,7 +173,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://blog.kyrios.cn/b-autumn-2020-banner/">
+    <link itemprop="mainEntityOfPage" href="https://blog.kyrios.cn/thinking-about-community-ecosystem/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -188,7 +186,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          某站banner在Firefox上的渲染
+          虚与实的幻界
         </h1>
 
         <div class="post-meta">
@@ -198,14 +196,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2020-10-11 18:25:44" itemprop="dateCreated datePublished" datetime="2020-10-11T18:25:44+08:00">2020-10-11</time>
+              <time title="Created: 2021-02-23 03:00:44" itemprop="dateCreated datePublished" datetime="2021-02-23T03:00:44+08:00">2021-02-23</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-01-06 14:50:45" itemprop="dateModified" datetime="2021-01-06T14:50:45+08:00">2021-01-06</time>
+                <time title="Modified: 2021-02-24 00:43:37" itemprop="dateModified" datetime="2021-02-24T00:43:37+08:00">2021-02-24</time>
               </span>
 
           
@@ -221,31 +219,32 @@
       
         <hr />
 <center>
-某网站20年<span class="github-emoji" data-alias="maple_leaf" style="" data-fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f341.png?v8">🍁</span>秋季的banner设计的挺好看的，然而在Firefox上的实际动画渲染效果却一言难尽，所以自己尝试摸索了一下。
+对社区生态的现状的随想
 </center>
 <hr />
-<h3 id="tl-dr">TL; DR</h3>
-<p><em>在禁用自动硬件加速情况下, <code>Firefox</code>在渲染这个banner的时候似乎没有使用GPU加速，使用<code>&lt;iframe&gt;</code>可以缓解这个问题。</em></p>
-<h3 id="detail">Detail</h3>
 <blockquote>
-<p>测试环境：</p>
-<ul>
-<li>显卡: i7-6700HQ核显</li>
-<li>Firefox: 81.0.1 禁用自动硬件加速(我笔记本的硬件加速有些驱动相关的问题)</li>
-<li>Chrome: 86.0.4240.75</li>
-</ul>
+<p>既然是出于兴趣和爱好的话，就不能影响自己基础的生活，否则它就不再是爱好，也不是兴趣，而是一个负担。 --囧仙</p>
 </blockquote>
-<iframe src="https://codesandbox.io/embed/magical-golick-le4pt?fontsize=14&amp;hidenavigation=1&amp;theme=dark&amp;view=preview" style="width:100%; height:200px; border:0; border-radius: 4px; overflow:hidden;" title="magical-golick-le4pt" allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking" sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts">
-</iframe>
-<p>为了方便分析首先实现一个banner，先把模板HTML部分写好，之后用React来实现动画效果。</p>
-<p>最开始想去某网站前端看一下他们的一些动画效果参数，在DOM改变处下了断点，然而断下来的地方是混淆的JS代码。丢到<a href="jsnice.org">jsnice</a>解了混淆后勉强能看，然而转念一想此处CSS属性变化(主要指<code>transform</code>)应该只是一个线性变化，测一个极限值自己算要方便的多，实际测试中发现<code>filter: blur</code>有些不是线性变化的，<del>取了几个点做了个拟合</del>(别拟合了，还是点对点直线好用)，效果差强人意。</p>
-<p>框架弄完了来看一下当前的性能数据，在<strong>Firefox</strong>上开了个性能分析看到动画只有<strong>8fps</strong>，和某网站首页动画的帧数(<strong>7fps</strong>)基本相同。这当中每次重绘的耗时都在80-100ms。一次重绘如果需要0.1s的话，就算DOM属性计算这些步骤不耗时，浏览器一秒内最多也就能渲染10帧。</p>
-<p><strong>然后为了比较一些性能数据，我开了个Chrome，我发现这个动画在Chrome上可以跑到50fps！</strong></p>
-<p>最开始我以为是合成层的处理方式不同导致的渲染效率不同，后来查了些资料，开了调试设置对比了一下，似乎并没有不同之处。之后我找到了一篇关于CSS性能优化的资料，里面提到有一些元素和CSS会触发GPU渲染。对照了一下某网站的实现，怀疑其中<code>translate: rotate(0deg)</code>这一项就是用来触发GPU加速的，虽然不知道为什么在<strong>Firefox</strong>上没有生效。在一些尝试后，我发现<code>position: fixed;</code>和<code>&lt;iframe&gt;</code>可以在<strong>Firefox</strong>上触发加速，就像上面你看到的那样。这样大概能达到<strong>26fps</strong>，和最开始的8fps相比好了很多了。</p>
-<p>虽然和<strong>Chrome</strong>相比还有差距，但是我最近没什么空深究这个问题，准备暂时就这样搁置了。</p>
-<h3 id="refer">Refer</h3>
-<p><a target="_blank" rel="noopener" href="http://zencode.in/20.CSS%E7%A1%AC%E4%BB%B6%E5%8A%A0%E9%80%9F%E7%9A%84%E5%A5%BD%E4%B8%8E%E5%9D%8F.html">CSS硬件加速的好与坏</a>: 一些有用的测试方法</p>
-<p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Learn/Performance/CSS">CSS performance optimization</a></p>
+<h2 id="起子">起子</h2>
+<p>睡前在B站刷到了风咒的视频「做了九年 DOTA2 视频后的思考：为什么 DOTA2 的 UP 通常只能接到这种广告？」，看完后激发了我的很多想法。正好前不久东方圈的年货节目，东方华灯宴也给我留下了深刻的印象。在我看来，DOTA2 圈子是个比较特殊的社区。和其他的同人/粉丝社区相比，某些差异引发了非常有趣的现象，下面是我个人的一些深夜随想。</p>
+<p>单从内容而言，我觉得风咒的 DOTA2 视频质量是不错的，所以我认真的看了他最新的这个视频。在视频中，他向观众分享了他从 12 年开始创作 DOTA2 的内容，17 年在某游戏大厂做视频运营，再到后来成为全职视频作者（我没理解错的话）的经历并在此基础上发表了他对Dota圈子充满菠菜广告原因的看法。从他的视角来看，相比隔壁某 MOBA 游戏，DOTA2 生态的问题在于游戏商从赞助商获得了绝大多数资源，但是并没有把获得的蛋糕分给下游的战队和媒体，所以独立自媒体只能接菠菜广告来维持生存。</p>
+<h2 id="社群的生态">社群的生态</h2>
+<p>在发表我自己的观点之前，我想先讨论一下别的圈子的生态是如何运作的。</p>
+<p>第一个对比的圈子是隔壁某MOBA游戏，就是只要提到就会让一部分人震怒的那个。在游戏商近乎垄断的渠道支撑下，隔壁联盟的大小比赛都能获得很高的关注度，自然能吸引到很多赞助方前来寻求合作。资源不断的流向媒体和战队就能养活更多的选手和内容创作者，其中甚至包括了不少全职的创作者。更精彩的比赛和更优质的社区内容能吸引到更多的爱好者，这样整个圈子的生态就形成了良性循环。</p>
+<p>另一个要提到的圈子是东方 Project。东方圈属于同人圈子，整体的大环境是非商业化的。业余时间里，爱好者们在一起用爱发电进行二次创作，偶尔会有囧仙这样的社区领袖组织一些幻奏盛宴这样高质量的同人活动。在这样的环境下，爱好者们自由选择支持自己喜欢的同人作品。整个圈子在几乎没有资本介入的情况下有活力的运行着，每年都能产出像刚过去的 2021 东方华灯宴一样优秀的作品。</p>
+<h2 id="不同的期望">不同的期望</h2>
+<p>那么，在各方的期望中 DOTA2 应该是一个什么样的圈子呢？</p>
+<p>从论坛的反应来看，很多玩家希望 DOTA2 能成为隔壁那样的商业化社群。你可以在任何时候打开社区，在新闻的评论区或者论坛版块找到诸如“隔壁又怎么怎么样了，V社还是一点动作都没有，真是dead game”此类恨铁不成钢的言论。尽管不排除可能存在沉默的大多数的可能，但是从这些周常出现的热门帖子/评论还是能反映出相当一部分玩家希望V社能推动 DOTA2 社区的商业化并吸引来资本以改善社区生态。</p>
+<p>但V社显然有他们自己的想法。就拿 DOTA2 的年度盛事 The International (TI) 来说，为了保证观众的观看体验，过去的9届TI，观众们看不到除了各战队的赞助商以外的商业赞助。根据圈内人的消息，V社还曾在TI期间召集俱乐部负责人开会表示：「我们公司到现在也不知道你们俱乐部为选手做了些什么？你们的存在有意义么？」。结合V社平日的行为，我们不难得出结论V社想要的其实是东方社群那样的环境。代入解说一下就是：「我V社就是个开发游戏的，我只负责向玩家群体输出优质的游戏内容，其他各种各样的社区创作我都欢迎，我每年再组织一个国际邀请赛，大家就以业余选手身份来现场组个队切磋一下，各位玩的开心的同时也向社区贡献一些精彩的比赛就行。我对之前的游戏像半条命，传送门都是这样的态度，游戏很成功玩家们也很满意。我对 DOTA2 和我之前开发的游戏一视同仁，我就问你有什么问题。」</p>
+<p>这么看来不管是玩家还是V社的立场似乎都能站住脚： 商业化的社群在一个能够强势整合资源的官方支撑下因为有资本注入，能养活更多的全职从业者。所以会有更多高质量的社区内容来为圈子带来更多的关注，不管是爱好者，路人还是商家都能从中得到自己想要的。 相比之下，非商业化社群不需要一个强势的官方运营，社区自然会推举出一些社区领袖来统筹资源。由于低商业化，社区资源也能更多的被分配给对社区有贡献的人。除此之外没有逐利的人来破坏爱好者间友好交流的环境，圈子的气氛会更加纯粹。这种环境的产生作品有时会更多的带有艺术品的属性而不是商品的属性，让爱好者们更乐在其中。</p>
+<h2 id="理想和现实">理想和现实</h2>
+<p>为什么这两种社群能良好的运转而到了 DOTA2 社群就矛盾重重？</p>
+<p>在和论坛的网友们讨论了一番之后，我认为 DOTA2 的强竞技性和非商业化的社群模式是冲突的。</p>
+<p>一方面 DOTA2 的游戏质量自不必多说，到现在我也认为 DOTA2 是目前质量最高，比赛最好看的MOBA游戏。优秀的游戏质量吸引来了大量玩家，而人群和竞技的碰撞带来了名为赌博的阴暗面。这种刻在人类基因里的娱乐早已扎根于各大竞技项目。我没有为菠菜辩护的想法，在众多因素的影响下，菠菜在现代语境就是一项罪孽深重的活动，菠菜的人经常会对周围的人和环境在有意或者无意中造成伤害，更何况退一万步讲，菠菜在大陆还是违法行为。在隔壁圈子，如果假赛横行，势必会给已经入局的资方造成不小的经济和名誉损失，所以高度商业化的环境约束了明面上的菠菜行为，遏制了其造成的潜在破坏。在东方圈子就更不用说了，不存在竞技自然从根本上就不存在菠菜的问题。但是在V社几乎放任不管的情况下，肆无忌惮的菠菜如附骨之疽对 DOTA2 社群造成了极其恶劣的伤害。</p>
+<p>另一方面强竞技性也许会一定程度上消耗社群的创作热情。毕竟打Dota对于很多玩家来说本身就是很累人的一件事了，也许精力不够充沛的选手下线之后就会直接选择休息。对于这个观点我不是很肯定。</p>
+<h2 id="当下和未来">当下（和未来？）</h2>
+<p>综合以上，回到风咒的思考。从他的视频中，我看到的是一开始一个 DOTA2 的粉丝用爱发电，为社区创作了一些优秀的视频内容并从这个过程中获得了快乐。慢慢的，随着他的游戏行业有了更深的了解，他决定将更多的精力投在这上面并期冀获得一些物质上的回报。将自己生活的来源寄托于投入了全部精力的事业，这无可厚非。但是 DOTA2 的社区没有他想象中的那么多资源，他做了很多努力希望能获得一些商业资本的注意但他失败了。生活所迫之下，他选择了饮鸩止渴，接受菠菜赞助。之后的事情，无非是在毒药生效前在恶性循环的漩涡中作徒劳的挣扎罢了。</p>
+<p>风咒最后选择了退出，我不知道 DOTA2 最后是否成为了他的负担，如果是的话，我想这也是他的自我解脱。对于以后的 DOTA2 社群环境，如果要达成V社理想中的非商业模式，我认为唯一的方法只有从V社发起对菠菜的重拳。如果V社单方面无法负担这巨大的成本，也许我们就需要一名新的社区领袖来代表社群驱逐菠菜。最近有沙特王子注资 DOTA2 动画的消息。有说法是他的下一步计划是收购V社。无论是转型商业化社群还是获得新的支持来对抗菠菜，我认为这都是一件好事。作为一个 DOTA2 的玩家，我衷心希望能在未来看到更健康更有活力的 DOTA2 社区。</p>
 
     </div>
 
@@ -256,9 +255,7 @@
       <footer class="post-footer">
           
           <div class="post-tags">
-              <a href="/tags/Dev/" rel="tag"><i class="fa fa-tag"></i> Dev</a>
-              <a href="/tags/Frontend/" rel="tag"><i class="fa fa-tag"></i> Frontend</a>
-              <a href="/tags/GPU/" rel="tag"><i class="fa fa-tag"></i> GPU</a>
+              <a href="/tags/Essay/" rel="tag"><i class="fa fa-tag"></i> Essay</a>
           </div>
 
         
@@ -267,13 +264,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/milky-osu-player-patch01/" rel="prev" title="Osu-Player Patch手记">
-      <i class="fa fa-chevron-left"></i> Osu-Player Patch手记
+    <a href="/cve-2017-7184-repro/" rel="prev" title="CVE-2017-7184分析&复现">
+      <i class="fa fa-chevron-left"></i> CVE-2017-7184分析&复现
     </a></div>
-      <div class="post-nav-item">
-    <a href="/cve-2017-16995-repro/" rel="next" title="CVE-2017-16995分析&复现">
-      CVE-2017-16995分析&复现 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -333,7 +327,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#tl-dr"><span class="nav-number">1.</span> <span class="nav-text">TL; DR</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#detail"><span class="nav-number">2.</span> <span class="nav-text">Detail</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#refer"><span class="nav-number">3.</span> <span class="nav-text">Refer</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B5%B7%E5%AD%90"><span class="nav-number">1.</span> <span class="nav-text">起子</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A4%BE%E7%BE%A4%E7%9A%84%E7%94%9F%E6%80%81"><span class="nav-number">2.</span> <span class="nav-text">社群的生态</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8D%E5%90%8C%E7%9A%84%E6%9C%9F%E6%9C%9B"><span class="nav-number">3.</span> <span class="nav-text">不同的期望</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%90%86%E6%83%B3%E5%92%8C%E7%8E%B0%E5%AE%9E"><span class="nav-number">4.</span> <span class="nav-text">理想和现实</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BD%93%E4%B8%8B%E5%92%8C%E6%9C%AA%E6%9D%A5"><span class="nav-number">5.</span> <span class="nav-text">当下（和未来？）</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -494,7 +488,7 @@ NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
       repo        : 'kyrios0.github.io',
       owner       : 'kyrios0',
       admin       : ['kyrios0'],
-      id          : '8752f425f7ce7da2d43dd4d248de219b',
+      id          : '3a2b78ad9534d7f8bf372f582613a954',
         language: '',
       distractionFreeMode: true
     });
