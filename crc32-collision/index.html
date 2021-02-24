@@ -23,19 +23,19 @@
     var CONFIG = {"hostname":"blog.kyrios.cn","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="那些年我们解过的压缩包系列，最近打CTF遇到了不少加密的压缩包，总结了一下攻击方式，感觉不外乎暴力破解、伪加密、明文攻击和CRC32攻击这几种。最近学了一下CRC32攻击，感觉思路比较清奇，做个笔记。">
+  <meta name="description" content="那些年我们解过的压缩包系列，最近打 CTF 遇到了不少加密的压缩包，总结了一下攻击方式，感觉不外乎暴力破解、伪加密、明文攻击和 CRC32 攻击这几种。最近学了一下 CRC32 攻击，感觉思路比较清奇，做个笔记。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="CRC32碰撞攻击">
+<meta property="og:title" content="CRC32 碰撞攻击">
 <meta property="og:url" content="https://blog.kyrios.cn/crc32-collision/">
 <meta property="og:site_name" content="Kyr1os&#39; Blog">
-<meta property="og:description" content="那些年我们解过的压缩包系列，最近打CTF遇到了不少加密的压缩包，总结了一下攻击方式，感觉不外乎暴力破解、伪加密、明文攻击和CRC32攻击这几种。最近学了一下CRC32攻击，感觉思路比较清奇，做个笔记。">
+<meta property="og:description" content="那些年我们解过的压缩包系列，最近打 CTF 遇到了不少加密的压缩包，总结了一下攻击方式，感觉不外乎暴力破解、伪加密、明文攻击和 CRC32 攻击这几种。最近学了一下 CRC32 攻击，感觉思路比较清奇，做个笔记。">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://blog.kyrios.cn/crc32-collision/img/CRC00.jpg">
 <meta property="og:image" content="https://blog.kyrios.cn/crc32-collision/img/CRC02.jpg">
 <meta property="og:image" content="https://blog.kyrios.cn/crc32-collision/img/CRC03.jpg">
 <meta property="og:image" content="https://blog.kyrios.cn/crc32-collision/img/CRC04.jpg">
 <meta property="article:published_time" content="2017-05-25T10:33:53.000Z">
-<meta property="article:modified_time" content="2020-09-12T21:23:17.138Z">
+<meta property="article:modified_time" content="2021-02-24T06:46:23.530Z">
 <meta property="article:author" content="Kyr1os">
 <meta property="article:tag" content="Misc">
 <meta name="twitter:card" content="summary">
@@ -54,7 +54,7 @@
   };
 </script>
 
-  <title>CRC32碰撞攻击 | Kyr1os' Blog</title>
+  <title>CRC32 碰撞攻击 | Kyr1os' Blog</title>
   
 
 
@@ -191,7 +191,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          CRC32碰撞攻击
+          CRC32 碰撞攻击
         </h1>
 
         <div class="post-meta">
@@ -208,7 +208,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-09-13 05:23:17" itemprop="dateModified" datetime="2020-09-13T05:23:17+08:00">2020-09-13</time>
+                <time title="Modified: 2021-02-24 14:46:23" itemprop="dateModified" datetime="2021-02-24T14:46:23+08:00">2021-02-24</time>
               </span>
 
           
@@ -224,7 +224,7 @@
       
         <hr />
 <center>
-那些年我们解过的压缩包系列，最近打CTF遇到了不少加密的压缩包，总结了一下攻击方式，感觉不外乎<strong>暴力破解、伪加密、明文攻击和CRC32攻击</strong>这几种。最近学了一下CRC32攻击，感觉思路比较清奇，做个笔记。
+那些年我们解过的压缩包系列，最近打 CTF 遇到了不少加密的压缩包，总结了一下攻击方式，感觉不外乎<strong>暴力破解、伪加密、明文攻击和 CRC32 攻击</strong>这几种。最近学了一下 CRC32 攻击，感觉思路比较清奇，做个笔记。
 </center>
 <hr />
 <h2 id="x01-crc概述">0x01 CRC概述</h2>
@@ -262,12 +262,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2017-ccpp-coursework/" rel="prev" title="Touhou开发手记">
-      <i class="fa fa-chevron-left"></i> Touhou开发手记
+    <a href="/2017-ccpp-coursework/" rel="prev" title="Touhou 开发手记">
+      <i class="fa fa-chevron-left"></i> Touhou 开发手记
     </a></div>
       <div class="post-nav-item">
-    <a href="/aes-cbc-byte-flipping-attack/" rel="next" title="AES CBC字节翻转攻击">
-      AES CBC字节翻转攻击 <i class="fa fa-chevron-right"></i>
+    <a href="/aes-cbc-byte-flipping-attack/" rel="next" title="AES CBC 字节翻转攻击">
+      AES CBC 字节翻转攻击 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
