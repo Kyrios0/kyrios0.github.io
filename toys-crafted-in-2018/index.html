@@ -36,7 +36,7 @@
 <meta property="og:image" content="https://blog.kyrios.cn/toys-crafted-in-2018/img/login.png">
 <meta property="og:image" content="https://blog.kyrios.cn/toys-crafted-in-2018/img/bnj.png">
 <meta property="article:published_time" content="2019-01-27T16:55:37.000Z">
-<meta property="article:modified_time" content="2020-12-07T13:05:00.257Z">
+<meta property="article:modified_time" content="2021-03-23T08:30:03.278Z">
 <meta property="article:author" content="Kyr1os">
 <meta property="article:tag" content="Toy">
 <meta property="article:tag" content="Dev">
@@ -213,7 +213,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-12-07 21:05:00" itemprop="dateModified" datetime="2020-12-07T21:05:00+08:00">2020-12-07</time>
+                <time title="Modified: 2021-03-23 16:30:03" itemprop="dateModified" datetime="2021-03-23T16:30:03+08:00">2021-03-23</time>
               </span>
 
           
@@ -233,25 +233,25 @@
 </center>
 <hr />
 <blockquote>
-<p>这篇文章是我20年9月写的，但是其中提到的小玩具都是我大三的时候开发的。为了时间轴的整洁，我决定将这篇文章创作时间改到19年。</p>
+<p>这篇文章是我 20 年 9 月写的，但是其中提到的小玩具都是我大三的时候开发的。为了时间轴的整洁，我决定将这篇文章创作时间改到 19 年。</p>
 </blockquote>
 <p>值此服务器迁移之际，谨以此文纪念这些发生过的事情。</p>
 <h2 id="toys-index-2018.09.19">Toys' Index / 2018.09.19</h2>
 <p><img src="img/query.png" /></p>
 <h2 id="cnss-recruit-2018-trend-2018.09.19">CNSS Recruit 2018 Trend / 2018.09.19</h2>
-<p>2018年夏天，晴晴(<span class="citation" data-cites="Moycat">@Moycat</span>)写了一个非常好看的招新平台。美中不足的是由于各位Web爷爷都是鸽子，所以给平台上趋势图的工作依然没有人来完成。当时我看了一些别人写的爬虫代码，再加上晴晴平台给了获取所以答题记录的API，刚开学比较闲的我就有了写一个爬虫来画趋势图的想法。于是我就去晴晴那抄了一套CSS<del>踏上了前端的不归路</del>。</p>
-<p>去网上搜了一个Flask教程糊了个爬虫后端，爬下来的数据解析完毕后从后端发给前端用一个叫C3的JS库画折线图，整个应用由Gunicorn来起以提高可用性和稳定性。</p>
+<p>2018 年夏天，晴晴 (<span class="citation" data-cites="Moycat">@Moycat</span>) 写了一个非常好看的招新平台。美中不足的是由于各位 Web 爷爷都是鸽子，所以给平台上趋势图的工作依然没有人来完成。当时我看了一些别人写的爬虫代码，再加上晴晴平台给了获取所以答题记录的 API，刚开学比较闲的我就有了写一个爬虫来画趋势图的想法。于是我就去晴晴那抄了一套 CSS <del>踏上了前端的不归路</del>。</p>
+<p>去网上搜了一个 Flask 教程糊了个爬虫后端，爬下来的数据解析完毕后从后端发给前端用一个叫 C3 的 JS 库画折线图，整个应用由 Gunicorn 来起以提高可用性和稳定性。</p>
 <p>最后弄完效果是这样</p>
 <p><img src="img/cnssr2018_trend.png" /> <img src="img/cnssr2018_fresh_trend.png" /></p>
 <h2 id="保研计算器-2018.09.19">保研计算器 / 2018.09.19</h2>
-<p>刚上大三那会儿我是准备保研的，因为分数还不能说是稳上保研线，所以我和长者共同开发了这个保研分计算器。长者提供了非常好用uestc库，其中包含登录接口和成绩爬取接口，可以在后端方便的算出加权平均分。我写了剩余的后端部分以及一个登录页面和结果返回页面做前端并将应用整合后挂在了我博客上。</p>
+<p>刚上大三那会儿我是准备保研的，因为分数还不能说是稳上保研线，所以我和长者共同开发了这个保研分计算器。长者提供了非常好用的 uestc 库，其中包含登录接口和成绩爬取接口，可以在后端方便的算出加权平均分。我写了剩余的后端部分以及一个登录页面和结果返回页面做前端并将应用整合后挂在了我博客上。</p>
 <p>登录页面的前端长这样</p>
 <p><img src="img/login.png" /></p>
-<p>遗憾的是因为你电信息门户在19-20年期间频繁的更改登录接口，再加上我和长者都已毕业，无人维护的uestc库已经不能正常工作了，故本应用也已失效。</p>
+<p>遗憾的是因为你电信息门户在 19-20 年期间频繁的更改登录接口，再加上我和长者都已毕业，无人维护的 uestc 库已经不能正常工作了，故本应用也已失效。</p>
 <h2 id="拜年祭2019-2019.01.28">拜年祭2019 / 2019.01.28</h2>
-<p>某网站2019年弄了个拜年祭预约有礼活动，预约人数达到250万解锁奖励并且该数据实时更新，出于想了解该站有多少活跃用户的心态，我把爬招新平台的代码魔改之后爬了一下。最后结果是这样</p>
+<p>某网站 2019 年弄了个拜年祭预约有礼活动，预约人数达到250万解锁奖励并且该数据实时更新，出于想了解该站有多少活跃用户的心态，我把爬招新平台的代码魔改之后爬了一下。最后结果是这样</p>
 <p><img src="img/bnj.png" /></p>
-<p>从图上看比较有意思的地方是从2月3号21:44开始，预约人数在两小时内暴涨40万之后曲线突然停止增长，不知道具体的原因是什么。</p>
+<p>从图上看比较有意思的地方是从 2 月 3 号 21:44 开始，预约人数在两小时内暴涨 40 万之后曲线突然停止增长，不知道具体的原因是什么。</p>
 
     </div>
 
