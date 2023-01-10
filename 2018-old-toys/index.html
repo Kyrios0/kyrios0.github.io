@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-avatar.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-avatar.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-avatar.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Vollkorn SC:300,300italic,400,400italic,700,700italic|Hiragino Sans GB:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-loading-bar.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"blog.kyrios.cn","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="⚠ 本文内容已过期 &#x2F; This post is outdated ⚠">
+<meta property="og:type" content="article">
+<meta property="og:title" content="大三写的小玩具们">
+<meta property="og:url" content="https://blog.kyrios.cn/2018-old-toys/">
+<meta property="og:site_name" content="Kyr1os&#39; Blog">
+<meta property="og:description" content="⚠ 本文内容已过期 &#x2F; This post is outdated ⚠">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://blog.kyrios.cn/2018-old-toys/img/query.png">
+<meta property="og:image" content="https://blog.kyrios.cn/2018-old-toys/img/cnssr2018_trend.png">
+<meta property="og:image" content="https://blog.kyrios.cn/2018-old-toys/img/login.png">
+<meta property="og:image" content="https://blog.kyrios.cn/2018-old-toys/img/bnj.png">
+<meta property="article:published_time" content="2019-01-27T16:55:37.000Z">
+<meta property="article:modified_time" content="2023-01-10T10:34:34.406Z">
+<meta property="article:author" content="Kyr1os">
+<meta property="article:tag" content="Toy">
+<meta property="article:tag" content="Dev">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="Flask">
+<meta property="article:tag" content="Frontend">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blog.kyrios.cn/2018-old-toys/img/query.png">
+
+<link rel="canonical" href="https://blog.kyrios.cn/2018-old-toys/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>大三写的小玩具们 | Kyr1os' Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Kyr1os' Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">May the wind guide your road</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-friends">
+
+    <a href="/friends/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Friends</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/kyrios0" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://blog.kyrios.cn/2018-old-toys/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Kyr1os">
+      <meta itemprop="description" content="Each day is a blessing">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kyr1os' Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          大三写的小玩具们
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-01-28 00:55:37" itemprop="dateCreated datePublished" datetime="2019-01-28T00:55:37+08:00">2019-01-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2023-01-10 18:34:34" itemprop="dateModified" datetime="2023-01-10T18:34:34+08:00">2023-01-10</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <hr />
+<center>
+<strong><span class="github-emoji" data-alias="warning" style=""
+data-fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/26a0.png?v8">⚠</span>
+本文内容已过期 / This post is outdated <span class="github-emoji"
+data-alias="warning" style=""
+data-fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/26a0.png?v8">⚠</span></strong>
+</center>
+<hr />
+<blockquote>
+<p>这篇文章是我 20 年 9
+月写的，但是其中提到的小玩具都是我大三的时候开发的。为了时间轴的整洁，我决定将这篇文章创作时间改到
+19 年。</p>
+</blockquote>
+<p>值此服务器迁移之际，谨以此文纪念这些发生过的事情。</p>
+<h2 id="toys-index-2018.09.19">Toys' Index / 2018.09.19</h2>
+<p><img src="img/query.png" /></p>
+<h2 id="cnss-recruit-2018-trend-2018.09.19">CNSS Recruit 2018 Trend /
+2018.09.19</h2>
+<p>2018 年夏天，晴晴 (<span class="citation"
+data-cites="Moycat">@Moycat</span>)
+写了一个非常好看的招新平台。美中不足的是由于各位 Web
+爷爷都是鸽子，所以给平台上趋势图的工作依然没有人来完成。当时我看了一些别人写的爬虫代码，再加上晴晴平台给了获取所以答题记录的
+API，刚开学比较闲的我就有了写一个爬虫来画趋势图的想法。于是我就去晴晴那抄了一套
+CSS <del>踏上了前端的不归路</del>。</p>
+<p>去网上搜了一个 Flask
+教程糊了个爬虫后端，爬下来的数据解析完毕后从后端发给前端用一个叫 C3 的
+JS 库画折线图，整个应用由 Gunicorn 来起以提高可用性和稳定性。</p>
+<p>最后弄完效果是这样</p>
+<p><img src="img/cnssr2018_trend.png" /> <img
+src="img/cnssr2018_fresh_trend.png" /></p>
+<h2 id="保研计算器-2018.09.19">保研计算器 / 2018.09.19</h2>
+<p>刚上大三那会儿我是准备保研的，因为分数还不能说是稳上保研线，所以我和长者共同开发了这个保研分计算器。长者提供了非常好用的
+uestc
+库，其中包含登录接口和成绩爬取接口，可以在后端方便的算出加权平均分。我写了剩余的后端部分以及一个登录页面和结果返回页面做前端并将应用整合后挂在了我博客上。</p>
+<p>登录页面的前端长这样</p>
+<p><img src="img/login.png" /></p>
+<p>遗憾的是因为你电信息门户在 19-20
+年期间频繁的更改登录接口，再加上我和长者都已毕业，无人维护的 uestc
+库已经不能正常工作了，故本应用也已失效。</p>
+<h2 id="拜年祭2019-2019.01.28">拜年祭2019 / 2019.01.28</h2>
+<p>某网站 2019
+年弄了个拜年祭预约有礼活动，预约人数达到250万解锁奖励并且该数据实时更新，出于想了解该站有多少活跃用户的心态，我把爬招新平台的代码魔改之后爬了一下。最后结果是这样</p>
+<p><img src="img/bnj.png" /></p>
+<p>从图上看比较有意思的地方是从 2 月 3 号 21:44
+开始，预约人数在两小时内暴涨 40
+万之后曲线突然停止增长，不知道具体的原因是什么。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/Toy/" rel="tag"><i class="fa fa-tag"></i> Toy</a>
+              <a href="/tags/Dev/" rel="tag"><i class="fa fa-tag"></i> Dev</a>
+              <a href="/tags/Python/" rel="tag"><i class="fa fa-tag"></i> Python</a>
+              <a href="/tags/Flask/" rel="tag"><i class="fa fa-tag"></i> Flask</a>
+              <a href="/tags/Frontend/" rel="tag"><i class="fa fa-tag"></i> Frontend</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2018-xctf-final-wp/" rel="prev" title="XCTF 2018 Final - Railgun Writeup">
+      <i class="fa fa-chevron-left"></i> XCTF 2018 Final - Railgun Writeup
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019-qwb-final-wp/" rel="next" title="强网杯 2019 线下赛 Machine Writeup">
+      强网杯 2019 线下赛 Machine Writeup <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#toys-index-2018.09.19"><span class="nav-number">1.</span> <span class="nav-text">Toys&#39; Index &#x2F; 2018.09.19</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cnss-recruit-2018-trend-2018.09.19"><span class="nav-number">2.</span> <span class="nav-text">CNSS Recruit 2018 Trend &#x2F;
+2018.09.19</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%9D%E7%A0%94%E8%AE%A1%E7%AE%97%E5%99%A8-2018.09.19"><span class="nav-number">3.</span> <span class="nav-text">保研计算器 &#x2F; 2018.09.19</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8B%9C%E5%B9%B4%E7%A5%AD2019-2019.01.28"><span class="nav-number">4.</span> <span class="nav-text">拜年祭2019 &#x2F; 2019.01.28</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Kyr1os"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Kyr1os</p>
+  <div class="site-description" itemprop="description">Each day is a blessing</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">23</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/kyrios0" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;kyrios0" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:kyr1os@qq.com" title="E-Mail → mailto:kyr1os@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://osu.ppy.sh/users/11500292" title="OSU → https:&#x2F;&#x2F;osu.ppy.sh&#x2F;users&#x2F;11500292" rel="noopener" target="_blank"><i class="fa fa-headphones fa-fw"></i>OSU</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2017 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-keyboard"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Kyr1os</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x=document.getElementsByTagName("link");
+		//Find the last canonical URL
+		if(x.length > 0){
+			for (i=0;i<x.length;i++){
+				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
+					canonicalURL=x[i].href;
+				}
+			}
+		}
+    //Get protocol
+	    if (!canonicalURL){
+	    	curProtocol = window.location.protocol.split(':')[0];
+	    }
+	    else{
+	    	curProtocol = canonicalURL.split(':')[0];
+	    }
+      //Get current URL if the canonical URL does not exist
+	    if (!canonicalURL) canonicalURL = window.location.href;
+	    //Assign script content. Replace current URL with the canonical URL
+      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '6cd5e006f4344b4ef21b',
+      clientSecret: 'ee2b76bf152d51927924c4699df0df26805c9aab',
+      repo        : 'kyrios0.github.io',
+      owner       : 'kyrios0',
+      admin       : ['kyrios0'],
+      id          : '4c471ed73ef6a1988b17a8458b2fc0f1',
+        language: '',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+</body>
+</html>

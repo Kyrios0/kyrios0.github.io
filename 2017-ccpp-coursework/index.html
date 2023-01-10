@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-avatar.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-avatar.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-avatar.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Vollkorn SC:300,300italic,400,400italic,700,700italic|Hiragino Sans GB:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-loading-bar.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"blog.kyrios.cn","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="Github传送门">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Touhou 开发手记">
+<meta property="og:url" content="https://blog.kyrios.cn/2017-ccpp-coursework/">
+<meta property="og:site_name" content="Kyr1os&#39; Blog">
+<meta property="og:description" content="Github传送门">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://blog.kyrios.cn/2017-ccpp-coursework/img/sfml_th201.jpg">
+<meta property="og:image" content="https://blog.kyrios.cn/2017-ccpp-coursework/img/sfml_th202.jpg">
+<meta property="og:image" content="https://blog.kyrios.cn/2017-ccpp-coursework/img/sfml_th203.jpg">
+<meta property="og:image" content="https://blog.kyrios.cn/2017-ccpp-coursework/img/sfml_th204.jpg">
+<meta property="og:image" content="https://blog.kyrios.cn/2017-ccpp-coursework/img/sfml_th205.jpg">
+<meta property="og:image" content="https://blog.kyrios.cn/2017-ccpp-coursework/img/sfml_th206.jpg">
+<meta property="article:published_time" content="2017-05-15T03:51:00.000Z">
+<meta property="article:modified_time" content="2023-01-10T10:36:30.338Z">
+<meta property="article:author" content="Kyr1os">
+<meta property="article:tag" content="Dev">
+<meta property="article:tag" content="C++">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blog.kyrios.cn/2017-ccpp-coursework/img/sfml_th201.jpg">
+
+<link rel="canonical" href="https://blog.kyrios.cn/2017-ccpp-coursework/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Touhou 开发手记 | Kyr1os' Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Kyr1os' Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">May the wind guide your road</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-friends">
+
+    <a href="/friends/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Friends</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/kyrios0" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://blog.kyrios.cn/2017-ccpp-coursework/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Kyr1os">
+      <meta itemprop="description" content="Each day is a blessing">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kyr1os' Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Touhou 开发手记
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2017-05-15 11:51:00" itemprop="dateCreated datePublished" datetime="2017-05-15T11:51:00+08:00">2017-05-15</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2023-01-10 18:36:30" itemprop="dateModified" datetime="2023-01-10T18:36:30+08:00">2023-01-10</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <hr />
+<center>
+<a target="_blank" rel="noopener" href="https://github.com/Kyrios0/TouHou-Project-Fighters-"
+title="github传送门">Github传送门</a>
+</center>
+<hr />
+<h2 id="效果图">效果图</h2>
+<p><img src="img/sfml_th201.jpg" style="max-height: 720px;">
+<img src="img/sfml_th202.jpg" style="max-height: 720px;">
+<img src="img/sfml_th203.jpg" style="max-height: 720px;">
+<img src="img/sfml_th204.jpg" style="max-height: 720px;">
+<img src="img/sfml_th205.jpg" style="max-height: 720px;">
+<img src="img/sfml_th206.jpg" style="max-height: 720px;"></p>
+<p>// To-Do List 自带传送门</p>
+<h2 id="to-do-list">To-Do List</h2>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">编号</th>
+<th style="text-align: center;">任务（功能）</th>
+<th style="text-align: center;">Value</th>
+<th style="text-align: center;">Effort</th>
+<th>是否已完成</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">1</td>
+<td style="text-align: center;"><a
+href="#step01">完成SFML配置，显示“SFML works”</a></td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td>Done</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">2</td>
+<td style="text-align: center;"><a
+href="#step02">显示一架静止的飞机于屏幕底部</a></td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">1</td>
+<td>Done</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">2+</td>
+<td style="text-align: center;">显示僚机</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;"></td>
+<td></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">2+</td>
+<td style="text-align: center;">设置背景边框</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">4</td>
+<td>Done</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">2+</td>
+<td style="text-align: center;">设置背景动画</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">4</td>
+<td>Done</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">3</td>
+<td style="text-align: center;"><a href="#step03">背景音乐</a></td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td>Done</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">4</td>
+<td style="text-align: center;"><a
+href="#step04">左右键，控制移动飞机</a></td>
+<td style="text-align: center;">10</td>
+<td style="text-align: center;">3</td>
+<td>Done</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">4+</td>
+<td style="text-align: center;">移动的动画展示</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">2</td>
+<td>Done</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">4+</td>
+<td style="text-align: center;">判定点·低速移动</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">2</td>
+<td>Done</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">4+</td>
+<td style="text-align: center;">判定点动画特效</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">1</td>
+<td>Done</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">5</td>
+<td style="text-align: center;"><a href="#step05">限制左右边界</a></td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td>Done</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">6</td>
+<td style="text-align: center;"><a
+href="#step06">开炮，显示运动的炮弹</a></td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">7</td>
+<td>Done</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">6+</td>
+<td style="text-align: center;">子弹·击中音效</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">2</td>
+<td>Done</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">6+</td>
+<td style="text-align: center;">僚机发射子弹，并附带跟踪效果</td>
+<td style="text-align: center;">10</td>
+<td style="text-align: center;"></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">7</td>
+<td style="text-align: center;"><a
+href="#step07">炮弹飞出边界处理</a></td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">1</td>
+<td>Done</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><del>8</del></td>
+<td style="text-align: center;"><del>随机产生敌机，并向下运动</del></td>
+<td style="text-align: center;"><del>10</del></td>
+<td style="text-align: center;"></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">8</td>
+<td style="text-align: center;"><a
+href="#step08">根据时间轴产生敌机，并遵照轨迹方程移动</a></td>
+<td style="text-align: center;">20</td>
+<td style="text-align: center;">20</td>
+<td>Done</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">8+</td>
+<td style="text-align: center;">敌机的移动动画</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">3</td>
+<td>Done</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">9</td>
+<td style="text-align: center;"><a
+href="#step09">敌机飞出边界处理</a></td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">1</td>
+<td>Done</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">10</td>
+<td style="text-align: center;"><a
+href="#step10">碰撞处理（敌机与炮弹碰撞）</a></td>
+<td style="text-align: center;">10</td>
+<td style="text-align: center;">15</td>
+<td>Done</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">11</td>
+<td style="text-align: center;"><a
+href="#step11">显示敌机爆炸过程</a></td>
+<td style="text-align: center;">10</td>
+<td style="text-align: center;">2</td>
+<td>Done</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">12</td>
+<td style="text-align: center;"><a href="#step12">爆炸声音</a></td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">1</td>
+<td>Done</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">13</td>
+<td style="text-align: center;"><a href="#step13">计分及显示</a></td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">1</td>
+<td>Done</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">14</td>
+<td style="text-align: center;"><a href="#step14">敌机炮弹处理</a></td>
+<td style="text-align: center;">10</td>
+<td style="text-align: center;">1</td>
+<td>Done</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">14+</td>
+<td style="text-align: center;">首领符卡设计·实现</td>
+<td style="text-align: center;">100</td>
+<td style="text-align: center;">100</td>
+<td>Done</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">14+</td>
+<td style="text-align: center;">敌机炮弹音效</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">1</td>
+<td>Done</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">15</td>
+<td style="text-align: center;"><a
+href="#step15">被敌机击中处理（炸毁、3条命）</a></td>
+<td style="text-align: center;">10</td>
+<td style="text-align: center;">2</td>
+<td>Done</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">15+</td>
+<td style="text-align: center;">死亡音效和动画</td>
+<td style="text-align: center;">10</td>
+<td style="text-align: center;">1</td>
+<td>Done</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">16</td>
+<td style="text-align: center;"><a
+href="#step16">过关控制（过关需要计分、游戏速度控制）</a></td>
+<td style="text-align: center;">20</td>
+<td style="text-align: center;">1</td>
+<td>Done</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Total</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>//以下所有代码均未封装</p>
+<p><span id="step01"></span></p>
+<h2 id="配置">1.配置</h2>
+<p><a target="_blank" rel="noopener" href="https://www.sfml-dev.org/">SFML 2.4.2</a></p>
+<p><span id="step02"></span></p>
+<h2 id="显示静止飞机">2.显示静止飞机</h2>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">sf::RenderWindow <span class="title">mWindow</span><span class="params">(sf::VideoMode(<span class="number">1280</span>, <span class="number">960</span>), <span class="string">&quot;TouHou20.0-chs&quot;</span>)</span></span>;</span><br><span class="line">sf::Texture Reimu;</span><br><span class="line"><span class="keyword">if</span> (!Reimu.<span class="built_in">loadFromFile</span>(<span class="string">&quot;E:\\Media\\Sources\\Jpg&amp;Png\\TH\\Ex\\player\\pl00\\pl00.png&quot;</span>, sf::<span class="built_in">IntRect</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">30</span>, <span class="number">45</span>)))</span><br><span class="line">&#123;</span><br><span class="line">	<span class="built_in">puts</span>(<span class="string">&quot;Error: Load Reimu failed!&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">sf::Sprite <span class="title">pl01</span><span class="params">(Reimu)</span></span>;</span><br><span class="line">mWindow.<span class="built_in">draw</span>(pl01);</span><br></pre></td></tr></table></figure>
+<p>Tips：实际代码中采用了动画效果，会根据当前帧数来选定 Sprite。</p>
+<p><span id="step03"></span></p>
+<h2 id="bgm">3.BGM</h2>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (!music.<span class="built_in">openFromFile</span>(<span class="string">&quot;上海アリス幻樂団 - 不思議なお祓い棒.wav&quot;</span>))</span><br><span class="line">&#123;</span><br><span class="line">	<span class="built_in">puts</span>(<span class="string">&quot;Error: Open 上海アリス幻樂団 - 不思議なお祓い棒.wav failed!&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// Play the music</span></span><br><span class="line">music.<span class="built_in">play</span>();</span><br></pre></td></tr></table></figure>
+<p>Tips：music
+不会预先把文件读进缓冲区，所以适合大文件（1分钟以上？）的播放，在小音效的处理上应该使用预先把文件读进缓冲区的
+sound，可以极大的节省CPU的开销（实测大概是20倍的差距）。</p>
+<p><span id="step04"></span></p>
+<h2 id="左右键控制">4.左右键控制</h2>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (sf::Keyboard::<span class="built_in">isKeyPressed</span>(sf::Keyboard::Left))</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// move left...</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span> (sf::Keyboard::<span class="built_in">isKeyPressed</span>(sf::Keyboard::Right))</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// move right...</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span> (sf::Keyboard::<span class="built_in">isKeyPressed</span>(sf::Keyboard::Escape))</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// quit...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Tips：这里在实际的代码中其实采取了一个监听和处理分开的策略，感觉这样结构更清晰一下，效率也更高（大概）。</p>
+<p><span id="step05"></span></p>
+<h2 id="限制区域">5.限制区域</h2>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (mIsMovingUp == <span class="literal">true</span> &amp;&amp; player.hero.<span class="built_in">getPosition</span>().y &gt; <span class="number">40</span>)</span><br><span class="line">&#123;</span><br><span class="line">	player.hero.<span class="built_in">move</span>(<span class="number">0.0</span>, -player.speed);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> (mIsMovingDown == <span class="literal">true</span> &amp;&amp; player.hero.<span class="built_in">getPosition</span>().y &lt; <span class="number">850</span>)</span><br><span class="line">&#123;</span><br><span class="line">	player.hero.<span class="built_in">move</span>(<span class="number">0.0</span>, player.speed);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> (mIsMovingLeft == <span class="literal">true</span> &amp;&amp; player.hero.<span class="built_in">getPosition</span>().x &gt; <span class="number">69</span>)</span><br><span class="line">&#123;</span><br><span class="line">	player.hero.<span class="built_in">move</span>(-player.speed, <span class="number">0.0</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> (mIsMovingRight == <span class="literal">true</span> &amp;&amp; player.hero.<span class="built_in">getPosition</span>().x &lt; <span class="number">751</span>)</span><br><span class="line">&#123;</span><br><span class="line">	player.hero.<span class="built_in">move</span>(player.speed, <span class="number">0.0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Tips：STL 里的 list 下的 remove_if
+因为其内部实现的原因，是不支持函数重载的，所以后来写了一个针对 FO
+类的越界判定函数。之后最好能把两个函数整合一下，都针对 FO
+对象来判定会更灵活一些。</p>
+<p><span id="step06"></span> <span id="step07"></span> <span
+id="step09"></span></p>
+<h2 id="发射子弹越界回收">6&amp;7&amp;9.发射子弹&amp;越界回收</h2>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (mIsFire)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment">//playerAmmo = (mIsGrazing) ? player.LSAmmo : player.HSAmmo;</span></span><br><span class="line">	<span class="keyword">if</span> (i % <span class="number">2</span> == <span class="number">1</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		player.LSAmmo.<span class="built_in">setPosition</span>(sf::<span class="built_in">Vector2f</span>(player.hero.<span class="built_in">getPosition</span>().x + <span class="number">4</span>, player.hero.<span class="built_in">getPosition</span>().y + <span class="number">100</span>));</span><br><span class="line">		playerBullets.<span class="built_in">push_back</span>(player.LSAmmo);</span><br><span class="line">		layer.LSAmmo.<span class="built_in">setPosition</span>(sf::<span class="built_in">Vector2f</span>(player.hero.<span class="built_in">getPosition</span>().x + <span class="number">20</span>, player.hero.<span class="built_in">getPosition</span>().y + <span class="number">100</span>));</span><br><span class="line">		playerBullets.<span class="built_in">push_back</span>(player.LSAmmo);</span><br><span class="line">		player.HSAmmo.<span class="built_in">setPosition</span>(sf::<span class="built_in">Vector2f</span>(player.hero.<span class="built_in">getPosition</span>().x + <span class="number">4</span>, player.hero.<span class="built_in">getPosition</span>().y + <span class="number">130</span>));</span><br><span class="line">		playerBullets.<span class="built_in">push_back</span>(player.HSAmmo);</span><br><span class="line">		player.HSAmmo.<span class="built_in">setPosition</span>(sf::<span class="built_in">Vector2f</span>(player.hero.<span class="built_in">getPosition</span>().x + <span class="number">20</span>, player.hero.<span class="built_in">getPosition</span>().y + <span class="number">130</span>));</span><br><span class="line">		playerBullets.<span class="built_in">push_back</span>(player.HSAmmo);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">playerBullets.<span class="built_in">remove_if</span>(isOutOfBoard);</span><br><span class="line"><span class="keyword">for</span> (list&lt;sf::Sprite&gt;::iterator it = playerBullets.<span class="built_in">begin</span>(); it != playerBullets.<span class="built_in">end</span>(); it++)</span><br><span class="line">&#123;</span><br><span class="line">	it-&gt;<span class="built_in">setPosition</span>(it-&gt;<span class="built_in">getPosition</span>().x, it-&gt;<span class="built_in">getPosition</span>().y - <span class="number">60</span>);</span><br><span class="line"></span><br><span class="line">	mWindow.<span class="built_in">draw</span>(*it);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">isOutOfBoard</span><span class="params">(sf::Sprite value)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (value.<span class="built_in">getPosition</span>().y &lt;= <span class="number">136</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Tips：本来是给自机配备了两种火力模式以供选择的，后来觉得火力太薄了所以干脆一起搭载上了，大概对于敌机来说是很不友好的设定吧（笑）。</p>
+<p><span id="step08"></span> <span id="step16"></span></p>
+<h2 id="时间轴管理">8.1&amp;16.时间轴管理</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">void Game::Stage1()</span><br><span class="line">&#123;</span><br><span class="line">	static sf::Time elapsed1 = clock.restart();</span><br><span class="line">	elapsed1 = clock.getElapsedTime();</span><br><span class="line">	</span><br><span class="line">	static int evts[20] = &#123; 0 &#125;;</span><br><span class="line"></span><br><span class="line">	static int curTime = 1;</span><br><span class="line">	if (curTime &lt; elapsed1.asSeconds())</span><br><span class="line">	&#123;</span><br><span class="line">		printf(&quot;%.0f\n&quot;, elapsed1.asSeconds());</span><br><span class="line">		curTime++;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	switch ((int)elapsed1.asSeconds())</span><br><span class="line">	&#123;</span><br><span class="line">	case 1:</span><br><span class="line">		//pre</span><br><span class="line">		evts[1] = 1;</span><br><span class="line">		break;</span><br><span class="line">	case 12:</span><br><span class="line">		//title</span><br><span class="line">		evts[2] = 1;</span><br><span class="line">		break;</span><br><span class="line">	case 37:</span><br><span class="line">		//wave</span><br><span class="line">		evts[3] = 1;</span><br><span class="line">		break;</span><br><span class="line">	case 50:</span><br><span class="line">		//middle</span><br><span class="line">		evts[4] = 1;</span><br><span class="line">		break;</span><br><span class="line">	case 63:</span><br><span class="line">		//spellCard1</span><br><span class="line">		evts[5] = 1;</span><br><span class="line">		break;</span><br><span class="line">	case 100:</span><br><span class="line">		//boss</span><br><span class="line">		evts[6] = 1;</span><br><span class="line">		break;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Tips：如果 Clock 达到了触发条件，就把某个事件开关置
+1，新世界的大门就打开了（明明只是奇奇怪怪的弹幕游戏来着）。</p>
+<h2 id="时间轴事件">8.2.时间轴事件</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">int Stage01Event01()</span><br><span class="line">&#123;</span><br><span class="line">	static int curFrame = 0;</span><br><span class="line">	curFrame++;</span><br><span class="line">	static list&lt;FO&gt; wave1, wave2;</span><br><span class="line">	double gapTime = 0.4;</span><br><span class="line">	int gapFrame = gapTime * 60;</span><br><span class="line">	static int gap = 0, temp = 0;</span><br><span class="line">	if (curFrame % gapFrame == 1 &amp;&amp; curFrame &lt; 17 * gapFrame)</span><br><span class="line">	&#123;</span><br><span class="line">		//wave1</span><br><span class="line">	&#125;</span><br><span class="line">	if (curFrame == 270)</span><br><span class="line">	&#123;</span><br><span class="line">		//wave2</span><br><span class="line">	&#125;</span><br><span class="line">	wave1.remove_if(isFOOutOfBoard);</span><br><span class="line">	for (list&lt;FO&gt;::iterator it = wave1.begin(); it != wave1.end(); it++)</span><br><span class="line">	&#123;</span><br><span class="line">		//Trajectory equation 01</span><br><span class="line">	&#125;</span><br><span class="line">	wave2.remove_if(isFOOutOfBoard);</span><br><span class="line">	for (list&lt;FO&gt;::iterator it = wave2.begin(); it != wave2.end(); it++)</span><br><span class="line">	&#123;</span><br><span class="line">		//Trajectory equation 02</span><br><span class="line">	&#125;</span><br><span class="line">	if (i1 &gt; 15 * 60)</span><br><span class="line">	&#123;</span><br><span class="line">		wave1.clear();//Final clear for accident</span><br><span class="line">		wave2.clear();</span><br><span class="line">		return 1;</span><br><span class="line">	&#125;</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Tips：记得 return 1; 的时候顺便把门关上，不然可就糟了。</p>
+<p><span id="step10"></span></p>
+<h2 id="碰撞检测">10.1.碰撞检测</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">bool Game::checkCollision(sf::Sprite obj1, sf::Sprite obj2)</span><br><span class="line">&#123;</span><br><span class="line">	sf::FloatRect f1 = obj1.getGlobalBounds();</span><br><span class="line">	sf::FloatRect f2 = obj2.getGlobalBounds();</span><br><span class="line">	if (f1.intersects(f2))</span><br><span class="line">	&#123;</span><br><span class="line">		return true;</span><br><span class="line">	&#125;</span><br><span class="line">	return false;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="碰撞处理">10.2.碰撞处理</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">void Game::enemyCollisionProcessing(list&lt;FO&gt;::iterator it)</span><br><span class="line">&#123;</span><br><span class="line">	for (list&lt;sf::Sprite&gt;::iterator itAmmo = playerBullets.begin(); itAmmo != playerBullets.end(); itAmmo++)</span><br><span class="line">	&#123;</span><br><span class="line">		if (checkCollision(it-&gt;hero, *itAmmo))</span><br><span class="line">		&#123;</span><br><span class="line">			enemyUnderAttack(it, itAmmo);</span><br><span class="line"></span><br><span class="line">			if (it-&gt;HealthPoint &lt;= 0)</span><br><span class="line">			&#123;</span><br><span class="line">				enemyCrash(it);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Tips：自机用的碰撞处理也是差不多的，稍微改改就能用。</p>
+<p><span id="step11"></span> <span id="step12"></span></p>
+<h2 id="敌机爆炸过程">11&amp;12.敌机爆炸过程</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">void Game::enemyCrash(list&lt;FO&gt;::iterator it)</span><br><span class="line">&#123;</span><br><span class="line">	breakSound.play();</span><br><span class="line">	score += it-&gt;score;</span><br><span class="line">	deathEff.setTexture(deathCircle);</span><br><span class="line">	deathEff.setTextureRect(sf::IntRect(64, 0, 64, 64));</span><br><span class="line">	deathEff.setOrigin(32, 32);</span><br><span class="line">	deathEff.setPosition(it-&gt;hero.getPosition().x + it-&gt;width * 0.25, it-&gt;hero.getPosition().y + it-&gt;height * 0.25);</span><br><span class="line">	deathEff.setScale(0.1, 0.1);</span><br><span class="line">	deathEffs.push_back(deathEff);</span><br><span class="line">	deathEff.setScale(0.3, 0.06);</span><br><span class="line">	deathEff.setRotation(rand() % 360);</span><br><span class="line">	deathEffs.push_back(deathEff);</span><br><span class="line">	it-&gt;hero.setPosition(-100, -100);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><span id="step13"></span></p>
+<h2 id="计分和显示">13.计分和显示</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">void Game::boardDisplay()</span><br><span class="line">&#123;</span><br><span class="line">	mWindow.draw(front01);//Display main background</span><br><span class="line">	mWindow.draw(front02);</span><br><span class="line">	mWindow.draw(front03);</span><br><span class="line">	mWindow.draw(front04);</span><br><span class="line"></span><br><span class="line">	switch (remnant)</span><br><span class="line">	&#123;</span><br><span class="line">	case 3:</span><br><span class="line">		lifeBoard.setTextureRect(sf::IntRect(0, 0, 272, 36));</span><br><span class="line">		break;</span><br><span class="line">	case 2:</span><br><span class="line">		lifeBoard.setTextureRect(sf::IntRect(0, 44, 272, 36));</span><br><span class="line">		break;</span><br><span class="line">	case 1:</span><br><span class="line">		lifeBoard.setTextureRect(sf::IntRect(0, 90, 272, 36));</span><br><span class="line">		break;</span><br><span class="line">	default:</span><br><span class="line">		;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	lifeBoard.setScale(1.5, 1.5);</span><br><span class="line">	lifeBoard.setPosition(830, 300);</span><br><span class="line">	mWindow.draw(lifeBoard);</span><br><span class="line"></span><br><span class="line">	static string scoreStr;</span><br><span class="line">	scoreStr = &quot;Score:             &quot;;</span><br><span class="line">	scoreStr += to_string(score);</span><br><span class="line">	tempScore.setString(scoreStr);</span><br><span class="line">	tempScore.setStyle(sf::Text::Italic);</span><br><span class="line">	tempScore.setFont(font);</span><br><span class="line">	tempScore.setCharacterSize(50);</span><br><span class="line">	tempScore.setPosition(840, 50);</span><br><span class="line">	mWindow.draw(tempScore);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><span id="step14"></span></p>
+<h2 id="敌机炮弹处理">14.敌机炮弹处理</h2>
+<p>举了一个随机弹（尖弹）作为例子 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">void Game::setSharpRandom(list&lt;FO&gt;::iterator it, double speed)</span><br><span class="line">&#123;</span><br><span class="line">	enemyBulletSound.play();</span><br><span class="line">	FO SharpRandom;</span><br><span class="line">	SharpRandom.speed = speed;</span><br><span class="line">	SharpRandom.theta = rand()%360;</span><br><span class="line">	SharpRandom.width = 16;</span><br><span class="line">	SharpRandom.height = 16;</span><br><span class="line">	SharpRandom.hero.setTexture(allBullets1);</span><br><span class="line">	SharpRandom.hero.setTextureRect(sf::IntRect(64, 64, 16, 16));</span><br><span class="line">	SharpRandom.hero.setOrigin(8, 8);</span><br><span class="line">	SharpRandom.hero.setScale(1.5, 1.5);</span><br><span class="line">	SharpRandom.hero.setPosition(it-&gt;hero.getPosition().x, it-&gt;hero.getPosition().y + it-&gt;height);</span><br><span class="line">	SharpRandom.hero.setRotation(SharpRandom.theta  / PI * 180.0 + 90);</span><br><span class="line">	enemyBullets.push_back(SharpRandom);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><span id="step15"></span></p>
+<h2 id="自机判定">15.自机判定</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">bool Game::checkPlayerCollision()</span><br><span class="line">&#123;</span><br><span class="line">	sf::Vector2f JP = julgePoint.getPosition();</span><br><span class="line">	JP.x -= 8;</span><br><span class="line">	JP.y -= 8;</span><br><span class="line"></span><br><span class="line">	for (list&lt;FO&gt;::iterator it = enemyBullets.begin(); it != enemyBullets.end(); it++)</span><br><span class="line">	&#123;</span><br><span class="line">		sf::FloatRect f = it-&gt;hero.getGlobalBounds();</span><br><span class="line"></span><br><span class="line">		f.width /= 2.0;</span><br><span class="line">		f.height /= 2.0;</span><br><span class="line">		if (f.contains(JP))</span><br><span class="line">		&#123;</span><br><span class="line">			return true;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	return false;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/Dev/" rel="tag"><i class="fa fa-tag"></i> Dev</a>
+              <a href="/tags/C/" rel="tag"><i class="fa fa-tag"></i> C++</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2017-pwnablekr-notes/" rel="prev" title="Pwnable.kr Study Notes">
+      <i class="fa fa-chevron-left"></i> Pwnable.kr Study Notes
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2017-crc32-collision/" rel="next" title="CRC32 碰撞攻击">
+      CRC32 碰撞攻击 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%88%E6%9E%9C%E5%9B%BE"><span class="nav-number">1.</span> <span class="nav-text">效果图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#to-do-list"><span class="nav-number">2.</span> <span class="nav-text">To-Do List</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE"><span class="nav-number">3.</span> <span class="nav-text">1.配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%98%BE%E7%A4%BA%E9%9D%99%E6%AD%A2%E9%A3%9E%E6%9C%BA"><span class="nav-number">4.</span> <span class="nav-text">2.显示静止飞机</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bgm"><span class="nav-number">5.</span> <span class="nav-text">3.BGM</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B7%A6%E5%8F%B3%E9%94%AE%E6%8E%A7%E5%88%B6"><span class="nav-number">6.</span> <span class="nav-text">4.左右键控制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%99%90%E5%88%B6%E5%8C%BA%E5%9F%9F"><span class="nav-number">7.</span> <span class="nav-text">5.限制区域</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%91%E5%B0%84%E5%AD%90%E5%BC%B9%E8%B6%8A%E7%95%8C%E5%9B%9E%E6%94%B6"><span class="nav-number">8.</span> <span class="nav-text">6&amp;7&amp;9.发射子弹&amp;越界回收</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%97%B6%E9%97%B4%E8%BD%B4%E7%AE%A1%E7%90%86"><span class="nav-number">9.</span> <span class="nav-text">8.1&amp;16.时间轴管理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%97%B6%E9%97%B4%E8%BD%B4%E4%BA%8B%E4%BB%B6"><span class="nav-number">10.</span> <span class="nav-text">8.2.时间轴事件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A2%B0%E6%92%9E%E6%A3%80%E6%B5%8B"><span class="nav-number">11.</span> <span class="nav-text">10.1.碰撞检测</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A2%B0%E6%92%9E%E5%A4%84%E7%90%86"><span class="nav-number">12.</span> <span class="nav-text">10.2.碰撞处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%8C%E6%9C%BA%E7%88%86%E7%82%B8%E8%BF%87%E7%A8%8B"><span class="nav-number">13.</span> <span class="nav-text">11&amp;12.敌机爆炸过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%A1%E5%88%86%E5%92%8C%E6%98%BE%E7%A4%BA"><span class="nav-number">14.</span> <span class="nav-text">13.计分和显示</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%8C%E6%9C%BA%E7%82%AE%E5%BC%B9%E5%A4%84%E7%90%86"><span class="nav-number">15.</span> <span class="nav-text">14.敌机炮弹处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%AA%E6%9C%BA%E5%88%A4%E5%AE%9A"><span class="nav-number">16.</span> <span class="nav-text">15.自机判定</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Kyr1os"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Kyr1os</p>
+  <div class="site-description" itemprop="description">Each day is a blessing</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">23</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/kyrios0" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;kyrios0" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:kyr1os@qq.com" title="E-Mail → mailto:kyr1os@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://osu.ppy.sh/users/11500292" title="OSU → https:&#x2F;&#x2F;osu.ppy.sh&#x2F;users&#x2F;11500292" rel="noopener" target="_blank"><i class="fa fa-headphones fa-fw"></i>OSU</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2017 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-keyboard"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Kyr1os</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x=document.getElementsByTagName("link");
+		//Find the last canonical URL
+		if(x.length > 0){
+			for (i=0;i<x.length;i++){
+				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
+					canonicalURL=x[i].href;
+				}
+			}
+		}
+    //Get protocol
+	    if (!canonicalURL){
+	    	curProtocol = window.location.protocol.split(':')[0];
+	    }
+	    else{
+	    	curProtocol = canonicalURL.split(':')[0];
+	    }
+      //Get current URL if the canonical URL does not exist
+	    if (!canonicalURL) canonicalURL = window.location.href;
+	    //Assign script content. Replace current URL with the canonical URL
+      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '6cd5e006f4344b4ef21b',
+      clientSecret: 'ee2b76bf152d51927924c4699df0df26805c9aab',
+      repo        : 'kyrios0.github.io',
+      owner       : 'kyrios0',
+      admin       : ['kyrios0'],
+      id          : '09c3ebfeee04932d93b1cb0e1fa0dbc3',
+        language: '',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+</body>
+</html>

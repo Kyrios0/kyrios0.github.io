@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-avatar.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-avatar.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-avatar.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Vollkorn SC:300,300italic,400,400italic,700,700italic|Hiragino Sans GB:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-loading-bar.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"blog.kyrios.cn","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="最近 🛠 装了一台新机器。算上我去年装的，刚好是把 AMD，Intel，风冷，水冷的机器都装了一遍。装机的过程中也积累了些经验，这里做个记录，兼意识流装机指北。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2021 PC 装机指北">
+<meta property="og:url" content="https://blog.kyrios.cn/2021-09-pc-building/">
+<meta property="og:site_name" content="Kyr1os&#39; Blog">
+<meta property="og:description" content="最近 🛠 装了一台新机器。算上我去年装的，刚好是把 AMD，Intel，风冷，水冷的机器都装了一遍。装机的过程中也积累了些经验，这里做个记录，兼意识流装机指北。">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://blog.kyrios.cn/2021-09-pc-building/img/2021ver.jpg">
+<meta property="og:image" content="https://blog.kyrios.cn/2021-09-pc-building/img/2022pc.jpg">
+<meta property="og:image" content="https://blog.kyrios.cn/2021-09-pc-building/img/m2_shield.png">
+<meta property="og:image" content="https://blog.kyrios.cn/2021-09-pc-building/img/memory_slots.png">
+<meta property="og:image" content="https://blog.kyrios.cn/2021-09-pc-building/img/motherboard.png">
+<meta property="og:image" content="https://blog.kyrios.cn/2021-09-pc-building/img/pci_slots.png">
+<meta property="og:image" content="https://blog.kyrios.cn/2021-09-pc-building/img/chaos.jpg">
+<meta property="og:image" content="https://blog.kyrios.cn/2021-09-pc-building/img/2020_OC_max.bmp">
+<meta property="article:published_time" content="2021-09-23T16:31:53.000Z">
+<meta property="article:modified_time" content="2023-01-10T10:22:34.782Z">
+<meta property="article:author" content="Kyr1os">
+<meta property="article:tag" content="Toy">
+<meta property="article:tag" content="PC">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blog.kyrios.cn/2021-09-pc-building/img/2021ver.jpg">
+
+<link rel="canonical" href="https://blog.kyrios.cn/2021-09-pc-building/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>2021 PC 装机指北 | Kyr1os' Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Kyr1os' Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">May the wind guide your road</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-friends">
+
+    <a href="/friends/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Friends</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/kyrios0" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://blog.kyrios.cn/2021-09-pc-building/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Kyr1os">
+      <meta itemprop="description" content="Each day is a blessing">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kyr1os' Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          2021 PC 装机指北
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-09-24 00:31:53" itemprop="dateCreated datePublished" datetime="2021-09-24T00:31:53+08:00">2021-09-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2023-01-10 18:22:34" itemprop="dateModified" datetime="2023-01-10T18:22:34+08:00">2023-01-10</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <hr />
+<center>
+最近 <span class="github-emoji" data-alias="hammer_and_wrench" style=""
+data-fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f6e0.png?v8">🛠</span>
+装了一台新机器。算上我去年装的，刚好是把
+AMD，Intel，风冷，水冷的机器都装了一遍。装机的过程中也积累了些经验，这里做个记录，兼意识流装机指北。
+</center>
+<hr />
+<h2 id="需求和配置">需求和配置</h2>
+<h3 id="ver.">2020 ver.</h3>
+<p>去年装的机器是在忽略玩大作游戏需求的情况下以配置尽量均衡为出发点装的。板
+U 选择 I5-10600KF 和 MSI-Z490 A Pro,
+可以说是性价比拉满。存储由于西部数据的冷数据门爆雷（后来西数又爆了缓外降速...)，于是选择
+KIOXIA （原东芝）的 SSD，HDD 选择西数的 4T
+蓝盘基本满足家用需求。显卡选择 1660S，在不玩 3A
+的情况下是折中的选择。（谁能想到一年过后这张卡的价格已经是我购买时的两倍多了呢？显卡理财.jpg）剩下的部件也都具有优秀的性价比，以划算的价格提供了不错的使用体验。推荐。</p>
+<table>
+<colgroup>
+<col style="width: 5%" />
+<col style="width: 88%" />
+<col style="width: 5%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Component</th>
+<th>Name</th>
+<th>Price (RMB)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>板 U</td>
+<td><a
+target="_blank" rel="noopener" href="https://item.taobao.com/item.htm?spm=a1z0d.6639537.1997196601.15.74497484GTeGZm&amp;id=618933946725">Intel
+I5-10600KF + 微星 Z490 A PRO</a></td>
+<td>2129</td>
+</tr>
+<tr class="even">
+<td>内存</td>
+<td><a
+target="_blank" rel="noopener" href="https://item.jd.com/100004409761.html#crumb-wrap">威刚（ADATA）DDR4
+3200 32GB (16GBx2) 套装 XPG- 威龙 Z1)</a></td>
+<td>789</td>
+</tr>
+<tr class="odd">
+<td>显卡</td>
+<td><a
+target="_blank" rel="noopener" href="https://item.jd.com/100009149310.html">七彩虹（Colorful）战斧
+GeForce GTX 1660 SUPER 6G</a></td>
+<td>1899</td>
+</tr>
+<tr class="even">
+<td>固态</td>
+<td><a
+target="_blank" rel="noopener" href="https://item.jd.com/100012956294.html#crumb-wrap">铠侠（Kioxia）1000GB
+SSD 固态硬盘 NVMe M.2 接口 EXCERIA NVMe RC10系列</a></td>
+<td>719</td>
+</tr>
+<tr class="odd">
+<td>电源</td>
+<td><a target="_blank" rel="noopener" href="https://item.jd.com/6828139.html">安钛克 HCG650W</a></td>
+<td>579</td>
+</tr>
+<tr class="even">
+<td>散热</td>
+<td><a
+target="_blank" rel="noopener" href="https://item.jd.com/100010498080.html#crumb-wrap">利民（Thermalright）
+FS140 霜灵 双塔散热器全电镀 RGB</a></td>
+<td>249</td>
+</tr>
+<tr class="odd">
+<td>机箱</td>
+<td><a target="_blank" rel="noopener" href="https://item.jd.com/100008792814.html">先马（SAMA）鲁班 1
+黑色 游戏电脑主机箱</a></td>
+<td>188</td>
+</tr>
+<tr class="even">
+<td>存储</td>
+<td><a target="_blank" rel="noopener" href="https://item.jd.com/67991241835.html#crumb-wrap">西部数据
+SATA 接口 3.5 英寸 台式机械硬盘 4TB WD40EZRZ</a></td>
+<td>579</td>
+</tr>
+<tr class="odd">
+<td>总计</td>
+<td>2020 ver.</td>
+<td>7131</td>
+</tr>
+</tbody>
+</table>
+<p>出国之前忘了存照片所以没图，之后再补吧。。。</p>
+<h3 id="ver.-1">2021 ver.</h3>
+<p>今年装的机器因为要丢实验室做实验用，所以对 CPU
+性能需求较高，结合预算选择了 5800X，配的主板是 B550M Mortar
+WiFi，属于在预算内的最好选择了（本来实验是可以丢服务器上编译的，然而我有个刷机的需求，所以如果在服务器上编译的话还需要把
+Output Binary
+拖回本地再刷进设备，这样一来就不如本地编译效率高了）。显卡方面由于完全没有在实验室打游戏的可能性，所以使用捡垃圾大法从亚马逊上找了张
+2014 年生产的 W2100。作为一张亮机卡却有两个 DP
+接口还是很不错的。比较坑的地方是买回来才发现这玩意的 PCI
+挡板是半高的，装在我全高的机箱上不是特别稳，插线的时候需要小心一些。剩下的部件也都是预算能承受范围内我觉得比较优的选择，目前看来还不错。</p>
+<table>
+<colgroup>
+<col style="width: 5%" />
+<col style="width: 88%" />
+<col style="width: 5%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Component</th>
+<th>Name</th>
+<th>Price (USD)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>主板</td>
+<td><a
+target="_blank" rel="noopener" href="https://www.amazon.com/MSI-MAG-B550M-Motherboard-Processors/dp/B089CLTLDN/">MSI
+MAG B550M WiFi</a></td>
+<td>188.67</td>
+</tr>
+<tr class="even">
+<td>CPU</td>
+<td><a
+target="_blank" rel="noopener" href="https://www.amazon.com/AMD-Ryzen-5800X-16-Thread-Processor/dp/B0815XFSGK/">AMD
+Ryzen 7 5800X</a></td>
+<td>393.99</td>
+</tr>
+<tr class="odd">
+<td>内存</td>
+<td><a
+target="_blank" rel="noopener" href="https://www.amazon.com/XPG-Z1-3200MHz-CL16-20-20-AX4U3200316G16A-DBZ/dp/B084Q2GZDR">XPG
+Z1 DDR4 3200MHz (PC4 25600) 32GB (2x16GB)</a></td>
+<td>119.99</td>
+</tr>
+<tr class="even">
+<td>显卡</td>
+<td><a
+target="_blank" rel="noopener" href="https://www.amazon.com/FirePro-128-bit-Express-Certified-Refurbished/dp/B07M6RR4TN/">AMD
+FirePro W2100</a></td>
+<td>63.95</td>
+</tr>
+<tr class="odd">
+<td>固态</td>
+<td><a
+target="_blank" rel="noopener" href="https://www.amazon.com/SAMSUNG-MZ-V8V1T0B-AM-980-SSD/dp/B08V83JZH4/">SAMSUNG
+(MZ-V8V1T0B/AM) 980 SSD 1TB</a></td>
+<td>126.84</td>
+</tr>
+<tr class="even">
+<td>电源</td>
+<td><a
+target="_blank" rel="noopener" href="https://www.amazon.com/Antec-HCG750-Gold-Japanese-Capacitors/dp/B0009MWACK/">Antec
+HCG650 Gold Power Supply</a></td>
+<td>89.99</td>
+</tr>
+<tr class="odd">
+<td>散热</td>
+<td><a
+target="_blank" rel="noopener" href="https://www.amazon.com/Cooler-Master-MasterLiquid-Close-Loop-SickleFlow/dp/B08BV4XVV8/">Cooler
+Master MasterLiquid ML360 Mirror</a></td>
+<td>99.99</td>
+</tr>
+<tr class="even">
+<td>机箱</td>
+<td><a
+target="_blank" rel="noopener" href="https://www.amazon.com/Cooler-Master-MCB-B520-KGNN-RGB-showmanship-Transparent/dp/B08XLWCC3C/">Cooler
+Master MasterBox MB520 RGB</a></td>
+<td>64.99</td>
+</tr>
+<tr class="odd">
+<td>鼠标</td>
+<td><a
+target="_blank" rel="noopener" href="https://www.amazon.com/Logitech-G502-Performance-Gaming-Mouse/dp/B07GBZ4Q68/">Logitech
+G502</a></td>
+<td>44.45</td>
+</tr>
+<tr class="even">
+<td>键盘</td>
+<td><a target="_blank" rel="noopener" href="https://www.amazon.com/dp/B0875ZJZXB/">iKBC CD108 V2
+Ergonomic Mechanical Keyboard with Cherry MX Brown Switch</a></td>
+<td>79.99</td>
+</tr>
+<tr class="odd">
+<td>显示器</td>
+<td><a
+target="_blank" rel="noopener" href="https://www.amazon.com/Acer-XV272U-Pbmiiprzx-Technology-DisplayHDR400/dp/B07MQBPMJ2/">Acer
+XV272U</a> * 2</td>
+<td>291.00 *2</td>
+</tr>
+<tr class="even">
+<td>总计</td>
+<td>2021 ver.</td>
+<td>1854.85</td>
+</tr>
+</tbody>
+</table>
+<p><img src="img/2021ver.jpg" alt="2021 ver." /></p>
+<h3 id="ver.-updated-december-2022">2022 ver. (Updated: December
+2022)</h3>
+<p>去年组的机器被我丢实验室跑实验了，而自己在家一直用的是 2016
+年买的笔记本。正好矿潮结束了，在圣诞节之前终于决定组一台自用的机器。除了显卡和内存，其他部件都没怎么管性价比，突出一个开心就好。显卡方面，由于
+4080 / 4090 价格感人，最后选择了 3070
+ti。内存方面，由于没有内存超频的习惯，所以选了 3200 MHZ 的 XPG
+Z1。不过其实这套的主板和 CPU
+都支持更高的内存频率，日后升级内存的话可以考虑换更高频率的条子。</p>
+<table>
+<colgroup>
+<col style="width: 5%" />
+<col style="width: 88%" />
+<col style="width: 5%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Component</th>
+<th>Name</th>
+<th>Price (USD)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>主板</td>
+<td><a
+target="_blank" rel="noopener" href="https://www.amazon.com/ASUS-ROG-D4-Intel%C2%AE13th-Motherboard/dp/B0BHYFF4FK/">ROG
+STRIX Z790-A GAMING WIFI D4吹雪</a></td>
+<td>379.99</td>
+</tr>
+<tr class="even">
+<td>CPU</td>
+<td><a
+target="_blank" rel="noopener" href="https://www.amazon.com/Intel-i7-13700K-Desktop-Processor-P-cores/dp/B0BCF57FL5">Intel
+Core i7-13700K</a></td>
+<td>429.99</td>
+</tr>
+<tr class="odd">
+<td>内存</td>
+<td><a
+target="_blank" rel="noopener" href="https://www.amazon.com/XPG-3200MHz-288-Pin-CL16-20-20-AX4U320038G16A-DSZ1/dp/B085JRM1HJ">XPG
+Z1 DDR4 3200MHz (PC4 25600) 32GB (2x16GB)</a></td>
+<td>109.99</td>
+</tr>
+<tr class="even">
+<td>显卡</td>
+<td><a
+target="_blank" rel="noopener" href="https://www.amazon.com/ASUS-Graphics-DisplayPort-Axial-tech-2-9-Slot/dp/B096YQ6WVW">ASUS
+ROG Strix NVIDIA GeForce RTX 3070 Ti OC Edition</a></td>
+<td>699.99</td>
+</tr>
+<tr class="odd">
+<td>固态</td>
+<td><a
+target="_blank" rel="noopener" href="https://www.amazon.com/SAMSUNG-PCIe-Internal-Gaming-MZ-V8P1T0B/dp/B08GLX7TNT">SAMSUNG
+980 SSD 1TB PCle 4.0 NVMe M.2</a></td>
+<td>99.99</td>
+</tr>
+<tr class="even">
+<td>电源</td>
+<td><a
+target="_blank" rel="noopener" href="https://www.amazon.com/Phanteks-80PLUS-Supply-Modular-Certified/dp/B07W5RSX99">Phanteks
+(PH-P750G_US01) AMP Series 750W 80PLUS Gold</a></td>
+<td>133</td>
+</tr>
+<tr class="odd">
+<td>散热</td>
+<td><a target="_blank" rel="noopener" href="https://www.amazon.com/gp/product/B09KT32838">ASUS ROG
+Strix LC II 360</a></td>
+<td>179.99</td>
+</tr>
+<tr class="even">
+<td>机箱</td>
+<td><a
+target="_blank" rel="noopener" href="https://www.amazon.com/Antec-Computer-Tempered-Radiator-Included/dp/B08PT8SRZG">Antec
+DF700 Flux</a></td>
+<td>109.99</td>
+</tr>
+<tr class="odd">
+<td>总计</td>
+<td>2022 ver.</td>
+<td>2142.93</td>
+</tr>
+</tbody>
+</table>
+<p><img src="img/2022pc.jpg" alt="2022 ver." /></p>
+<h2 id="准备">准备</h2>
+<p>工作台</p>
+<p>螺丝刀</p>
+<p>扳手，可选，用来拧螺柱</p>
+<h2 id="building">Building</h2>
+<h3 id="取出主板">取出主板</h3>
+<p>开始装机之前释放静电，然后将主板放在装主板包装盒上。</p>
+<h3 id="cpu">CPU</h3>
+<p>找到主板上的 CPU 插槽。装 CPU 基本都是金属拉杆解锁，放进
+CPU，金属拉杆锁定这几个步骤。用 CPU
+底部的金三角确认正确置入方向即可。</p>
+<h3 id="ssd">SSD</h3>
+<p>一般情况下找到 M.2 插槽将 SSD 斜向插入再拧上 M.2 小螺丝即可。</p>
+<p>主流主板一般会有一个 M.2 挡板 (M.2 Shield) 帮助 SSD
+散热，拆下挡板即可看到高速 M.2 插槽。</p>
+<p><img src="img/m2_shield.png" alt="M.2 Shield" /></p>
+<p>装好 SSD
+后再把挡板装回去即可，如果挡板上带了保护贴则需要在把挡板装回原位之前撕掉保护贴。</p>
+<p>在装 SSD 的时候，有的主板会自带 2280 SSD 的螺柱，这种就插入 SSD
+再拧好螺丝即可，如果主板还在螺柱上预装了螺丝记得先把螺丝卸下来。如果你的
+SSD 不是 2280 尺寸或者主板没有预装好 2280
+位的螺柱就需要自己先装一个螺柱到对应位置。</p>
+<h3 id="内存">内存</h3>
+<p>找到内存插槽插进去就行。</p>
+<p>对于主流的四插槽主板，以离 CPU 从近到远的顺序把插槽编号为
+1234，一根内存的话插 2 槽，两根内存的话插 2 4
+槽，四根内存的话插满即可。</p>
+<p><img src="img/memory_slots.png" /></p>
+<h3 id="散热">散热</h3>
+<p>参考说明书根据你的散热器型号和 CPU 插槽型号在散热塔（风冷）/
+冷头（水冷）上装好扣具。在能覆盖 CPU
+表面的情况下抹上尽量薄的一层硅脂（新手的话稍微多抹一点也无所谓）。</p>
+<h4 id="风冷">风冷</h4>
+<p>将散热塔装到 CPU
+上。如果你的散热塔尺寸很大，你可能需要一把长一些的螺丝刀来将其固定。拧螺丝的时候注意轮流拧紧来让硅脂被压的尽量均匀。最后把
+CPU 风扇装到散热塔上并连接主板上的 CPU_FAN
+针脚即可（也可以不急着连线，后面再连）。</p>
+<h4 id="水冷">水冷</h4>
+<p>将风扇装到冷排上。然后把冷头扣到 CPU
+上，拧螺丝的时候注意轮流拧紧来让硅脂被压的尽量均匀。</p>
+<p>到此主板就可以准备安装到机箱上了。它现在看起来大概是这样</p>
+<p><img src="img/motherboard.png" /></p>
+<h3 id="hdd-optional">HDD (Optional)</h3>
+<p>把 HDD 固定到机箱的硬盘架上，硬盘架可能在电源位置旁边。如果不装 HDD
+也可以把硬盘架拆了方便走线。</p>
+<h3 id="电源">电源</h3>
+<p>我习惯在装主板之前先把电源装到机箱上去。当然你也可以先装主板后装电源。根据我的经验如果先把电源装到机箱上后就不太方便往上接线了。所以你可以参考我的做法，先把线接在电源上，再把电源固定在机箱上。固定电源很简单，找到电源仓，用四个螺丝将其固定即可。</p>
+<h3 id="主板安装">主板安装</h3>
+<p>在机箱的对应位置上找到符合你主板尺寸的孔位，部分主板可能需要先在这些孔位上装好螺柱。之后把主板平放上去，对准孔位，拧好螺丝。有些主板的
+IO 挡板和主板是分开的，别忘了把 IO 挡板装上去。</p>
+<h3 id="显卡">显卡</h3>
+<p>如果你只安装一个显卡，将其插在离 CPU 最近的 PCI
+接口上并取下机箱上对应位置的 PCI 挡板即可。</p>
+<p><img src="img/pci_slots.png" /></p>
+<h3 id="接线">接线</h3>
+<p>接线基本上就接主板和接电源两类线。电源的供电主要就供主板的 24 pin
+供电，CPU 4+4 pin 供电和显卡等一些地方可能用到的 PCI 6+2 pin
+供电。接主板的线可能有 CPU 风扇，系统风扇，水泵，RGB 灯光，USB
+接口和开机键等一系列接口。按着说明书接就行。</p>
+<p>如果对美观性有要求可以多拿几根绑带理理线。</p>
+<p><img src="img/chaos.jpg" alt="反面教材" /></p>
+<p>装机部分到此就基本结束了。</p>
+<h2 id="个人购买建议">个人购买建议</h2>
+<h3 id="是否超频">是否超频</h3>
+<p>如果确实有性能刚需并且散热给力的情况下可以考虑超频。Intel 带 K 的 CPU
+配 Z490 / Z590 主板超频效果还可以。但是考虑 Intel 11 代 U
+的散热已经很艰难了，建议多考虑下散热器的实力。</p>
+<p>如果不喜欢折腾的话 Intel 有个<a
+target="_blank" rel="noopener" href="https://www.intel.cn/content/www/cn/zh/support/products/81605/processors/processor-utilities-and-programs.html">傻瓜式一键超频软件</a>，本傻瓜在我的
+<a
+target="_blank" rel="noopener" href="https://www.intel.com/content/www/us/en/products/sku/199315/intel-core-i510600kf-processor-12m-cache-up-to-4-80-ghz/specifications.html">10600KF</a>
+上试了一下效果还不错。</p>
+<p><img src="img/2020_OC_max.bmp" /></p>
+<p>对于部分华硕主板，你也可以使用 <a
+target="_blank" rel="noopener" href="https://www.asus.com/Microsite/motherboard/Intelligent-motherboard/AI-Overclocking.html">AI
+一键超频</a>。我在 <a
+target="_blank" rel="noopener" href="https://www.intel.com/content/www/us/en/products/sku/230500/intel-core-i713700k-processor-30m-cache-up-to-5-40-ghz/specifications.html">13700K</a>
+上试了一下，感觉电压给的稍微有点高，通过监测软件看到单核最高频率是 6.1
+GHz，高负载下 P-Core 频率是 5.8 GHz，Cinebench R23
+跑到接近十分钟的时候有黑屏风险。但总体来说能用。</p>
+<h3 id="风冷水冷">风冷？水冷？</h3>
+<p>分体水在本文属于论外。本文的所有水冷都代指一体式水冷散热器，所有风冷都代指塔式风冷散热器</p>
+<ul>
+<li>由于风冷散热塔的体积一般较大，如果买的机箱比较小的话，建议水冷。</li>
+<li>同上，由于风冷散热塔比较沉，如果在竖装主板上不拆散热器的情况下运输的话，有可能会压坏主板。所以有便携需求，建议水冷。</li>
+<li>风冷的使用寿命高于水冷，而且不存在漏液风险，没有水冷那么高的保修需求。如果准备长期使用（&gt;5年）或者是推荐给朋友使用，建议风冷。</li>
+<li>从性能上讲，目前市面上顶级风冷和 360
+一体水的散热效果基本是五五开，选择两者皆可。相比之下水冷可能噪音稍微小一点点，但考虑到一体水的冷排上其实也有风扇，所以也不会好到哪里去。</li>
+</ul>
+<h3 id="需要专业硅脂">需要专业硅脂？</h3>
+<p>如果你是新手，不。
+再好的散热硅脂能带来的提升其实也比较有限。对新手来说买好的硅脂不如涂的时候涂好一点。而且有的专业硅脂真的很难涂（说的就是你，利民
+TF7）。</p>
+<p>如果你是老手，你肯定不会看到这里。</p>
+<h3 id="确认兼容性">确认兼容性</h3>
+<p>列装机单时首先要确认散热器是否附带与 CPU
+插槽对应的扣具（虽然一般散热器都会送好几种 CPU
+插槽对应的扣具，但是我最近还是遇到个奇葩散热器只支持 LGA1200
+害得我最后退货重新买了一个）。然后确认机箱能装下散热器。风冷要注意散热器尺寸和机箱限高。水冷要注意冷排尺寸和机箱预留的风扇空间是否足够。在购买机箱和散热的时候最好先规划好风道，有些机箱购买会送风扇，根据规划的信息确定还需要额外配几把风扇。提前规划风道还有个好处是可以规避潜在的兼容性问题，以酷冷至尊
+MB520 机箱为例，如果你规划的风道包含在机箱顶部装一个 360
+水冷用于进风，你就会发现这款机箱只支持在前部安装 360
+水冷而机箱顶部并没有安装 360
+水冷的空间，这时你也许就会考虑换一个机箱。除此之外，请确认电源是否能完整的提供各个部件的供电，电源的功率和接口两个方面都应该满足要求。</p>
+<p>如果自己拿不准，也可以到 <a
+target="_blank" rel="noopener" href="https://pcpartpicker.com/list/">pcpartpicker</a>
+上输入自己的配置单，网站会自动给出一个兼容性分析结果。</p>
+<p>End.</p>
+<h2 id="references">References</h2>
+<p><a
+target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV19A411a7sC">【硬件科普】为什么装机内存条推荐安装到第24槽而不是13槽？</a></p>
+<p><a
+target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Ca4y1W73e">【硬件科普】电脑散热也讲风水？全网最详细电脑散热器工作原理科普</a></p>
+<p><a
+target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Uk4y1m7a4">免费提升性能！“保姆级”CPU超频教程</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/Toy/" rel="tag"><i class="fa fa-tag"></i> Toy</a>
+              <a href="/tags/PC/" rel="tag"><i class="fa fa-tag"></i> PC</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021-09-riverside-first-view/" rel="prev" title="The Wind In The Riverside">
+      <i class="fa fa-chevron-left"></i> The Wind In The Riverside
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9C%80%E6%B1%82%E5%92%8C%E9%85%8D%E7%BD%AE"><span class="nav-number">1.</span> <span class="nav-text">需求和配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ver."><span class="nav-number">1.1.</span> <span class="nav-text">2020 ver.</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ver.-1"><span class="nav-number">1.2.</span> <span class="nav-text">2021 ver.</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ver.-updated-december-2022"><span class="nav-number">1.3.</span> <span class="nav-text">2022 ver. (Updated: December
+2022)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%86%E5%A4%87"><span class="nav-number">2.</span> <span class="nav-text">准备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#building"><span class="nav-number">3.</span> <span class="nav-text">Building</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%96%E5%87%BA%E4%B8%BB%E6%9D%BF"><span class="nav-number">3.1.</span> <span class="nav-text">取出主板</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cpu"><span class="nav-number">3.2.</span> <span class="nav-text">CPU</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ssd"><span class="nav-number">3.3.</span> <span class="nav-text">SSD</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%85%E5%AD%98"><span class="nav-number">3.4.</span> <span class="nav-text">内存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%A3%E7%83%AD"><span class="nav-number">3.5.</span> <span class="nav-text">散热</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%A3%8E%E5%86%B7"><span class="nav-number">3.5.1.</span> <span class="nav-text">风冷</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B0%B4%E5%86%B7"><span class="nav-number">3.5.2.</span> <span class="nav-text">水冷</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#hdd-optional"><span class="nav-number">3.6.</span> <span class="nav-text">HDD (Optional)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%B5%E6%BA%90"><span class="nav-number">3.7.</span> <span class="nav-text">电源</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BB%E6%9D%BF%E5%AE%89%E8%A3%85"><span class="nav-number">3.8.</span> <span class="nav-text">主板安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%98%BE%E5%8D%A1"><span class="nav-number">3.9.</span> <span class="nav-text">显卡</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%A5%E7%BA%BF"><span class="nav-number">3.10.</span> <span class="nav-text">接线</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%AA%E4%BA%BA%E8%B4%AD%E4%B9%B0%E5%BB%BA%E8%AE%AE"><span class="nav-number">4.</span> <span class="nav-text">个人购买建议</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%98%AF%E5%90%A6%E8%B6%85%E9%A2%91"><span class="nav-number">4.1.</span> <span class="nav-text">是否超频</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A3%8E%E5%86%B7%E6%B0%B4%E5%86%B7"><span class="nav-number">4.2.</span> <span class="nav-text">风冷？水冷？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9C%80%E8%A6%81%E4%B8%93%E4%B8%9A%E7%A1%85%E8%84%82"><span class="nav-number">4.3.</span> <span class="nav-text">需要专业硅脂？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A1%AE%E8%AE%A4%E5%85%BC%E5%AE%B9%E6%80%A7"><span class="nav-number">4.4.</span> <span class="nav-text">确认兼容性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#references"><span class="nav-number">5.</span> <span class="nav-text">References</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Kyr1os"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Kyr1os</p>
+  <div class="site-description" itemprop="description">Each day is a blessing</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">23</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/kyrios0" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;kyrios0" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:kyr1os@qq.com" title="E-Mail → mailto:kyr1os@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://osu.ppy.sh/users/11500292" title="OSU → https:&#x2F;&#x2F;osu.ppy.sh&#x2F;users&#x2F;11500292" rel="noopener" target="_blank"><i class="fa fa-headphones fa-fw"></i>OSU</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2017 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-keyboard"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Kyr1os</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x=document.getElementsByTagName("link");
+		//Find the last canonical URL
+		if(x.length > 0){
+			for (i=0;i<x.length;i++){
+				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
+					canonicalURL=x[i].href;
+				}
+			}
+		}
+    //Get protocol
+	    if (!canonicalURL){
+	    	curProtocol = window.location.protocol.split(':')[0];
+	    }
+	    else{
+	    	curProtocol = canonicalURL.split(':')[0];
+	    }
+      //Get current URL if the canonical URL does not exist
+	    if (!canonicalURL) canonicalURL = window.location.href;
+	    //Assign script content. Replace current URL with the canonical URL
+      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '6cd5e006f4344b4ef21b',
+      clientSecret: 'ee2b76bf152d51927924c4699df0df26805c9aab',
+      repo        : 'kyrios0.github.io',
+      owner       : 'kyrios0',
+      admin       : ['kyrios0'],
+      id          : '5a1adb5eb4350ab44abaa3596e8f1a9e',
+        language: '',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+</body>
+</html>
