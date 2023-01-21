@@ -39,7 +39,7 @@
 <meta property="og:image" content="https://blog.kyrios.cn/2021-09-pc-building/img/chaos.jpg">
 <meta property="og:image" content="https://blog.kyrios.cn/2021-09-pc-building/img/2020_OC_max.bmp">
 <meta property="article:published_time" content="2021-09-23T16:31:53.000Z">
-<meta property="article:modified_time" content="2023-01-10T10:22:34.782Z">
+<meta property="article:modified_time" content="2023-01-18T20:14:28.647Z">
 <meta property="article:author" content="Kyr1os">
 <meta property="article:tag" content="Toy">
 <meta property="article:tag" content="PC">
@@ -213,7 +213,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-01-10 18:22:34" itemprop="dateModified" datetime="2023-01-10T18:22:34+08:00">2023-01-10</time>
+                <time title="Modified: 2023-01-19 04:14:28" itemprop="dateModified" datetime="2023-01-19T04:14:28+08:00">2023-01-19</time>
               </span>
 
           
@@ -429,7 +429,7 @@ XV272U</a> * 2</td>
 <p>去年组的机器被我丢实验室跑实验了，而自己在家一直用的是 2016
 年买的笔记本。正好矿潮结束了，在圣诞节之前终于决定组一台自用的机器。除了显卡和内存，其他部件都没怎么管性价比，突出一个开心就好。显卡方面，由于
 4080 / 4090 价格感人，最后选择了 3070
-ti。内存方面，由于没有内存超频的习惯，所以选了 3200 MHZ 的 XPG
+ti。内存方面，由于没有内存超频的习惯，所以选了 3200 MHz 的 XPG
 Z1。不过其实这套的主板和 CPU
 都支持更高的内存频率，日后升级内存的话可以考虑换更高频率的条子。</p>
 <table>
@@ -515,7 +515,7 @@ DF700 Flux</a></td>
 <p>扳手，可选，用来拧螺柱</p>
 <h2 id="building">Building</h2>
 <h3 id="取出主板">取出主板</h3>
-<p>开始装机之前释放静电，然后将主板放在装主板包装盒上。</p>
+<p>开始装机之前释放静电，然后将主板放在主板包装盒上。</p>
 <h3 id="cpu">CPU</h3>
 <p>找到主板上的 CPU 插槽。装 CPU 基本都是金属拉杆解锁，放进
 CPU，金属拉杆锁定这几个步骤。用 CPU
@@ -564,11 +564,12 @@ IO 挡板和主板是分开的，别忘了把 IO 挡板装上去。</p>
 接口上并取下机箱上对应位置的 PCI 挡板即可。</p>
 <p><img src="img/pci_slots.png" /></p>
 <h3 id="接线">接线</h3>
-<p>接线基本上就接主板和接电源两类线。电源的供电主要就供主板的 24 pin
-供电，CPU 4+4 pin 供电和显卡等一些地方可能用到的 PCI 6+2 pin
+<p>接线基本上就接主板和接电源两类线。电源的供电主要就供主板的 24-pin
+供电，CPU 8-pin 供电和显卡等一些地方可能用到的 PCI 8-pin
 供电。接主板的线可能有 CPU 风扇，系统风扇，水泵，RGB 灯光，USB
 接口和开机键等一系列接口。按着说明书接就行。</p>
 <p>如果对美观性有要求可以多拿几根绑带理理线。</p>
+<p>如果不想理线，接线的最低要求是线不会因交叉而影响部件的安装和拆除并且远离风扇。条件满足后，侧板一盖就是理好了（确信）。</p>
 <p><img src="img/chaos.jpg" alt="反面教材" /></p>
 <p>装机部分到此就基本结束了。</p>
 <h2 id="个人购买建议">个人购买建议</h2>
@@ -586,9 +587,9 @@ target="_blank" rel="noopener" href="https://www.intel.com/content/www/us/en/pro
 target="_blank" rel="noopener" href="https://www.asus.com/Microsite/motherboard/Intelligent-motherboard/AI-Overclocking.html">AI
 一键超频</a>。我在 <a
 target="_blank" rel="noopener" href="https://www.intel.com/content/www/us/en/products/sku/230500/intel-core-i713700k-processor-30m-cache-up-to-5-40-ghz/specifications.html">13700K</a>
-上试了一下，感觉电压给的稍微有点高，通过监测软件看到单核最高频率是 6.1
-GHz，高负载下 P-Core 频率是 5.8 GHz，Cinebench R23
-跑到接近十分钟的时候有黑屏风险。但总体来说能用。</p>
+上试了一下，感觉电压给的稍微有点高，通过监测软件看到单核最高频率是 6.0
+GHz，高负载下短时间内 P-Core 频率是 5.8 GHz，时间长一点会降频到 5.6
+GHz，Cinebench R23 跑到接近十分钟的时候有黑屏风险。但总体来说能用。</p>
 <h3 id="风冷水冷">风冷？水冷？</h3>
 <p>分体水在本文属于论外。本文的所有水冷都代指一体式水冷散热器，所有风冷都代指塔式风冷散热器</p>
 <ul>
@@ -610,8 +611,9 @@ TF7）。</p>
 害得我最后退货重新买了一个）。然后确认机箱能装下散热器。风冷要注意散热器尺寸和机箱限高。水冷要注意冷排尺寸和机箱预留的风扇空间是否足够。在购买机箱和散热的时候最好先规划好风道，有些机箱购买会送风扇，根据规划的信息确定还需要额外配几把风扇。提前规划风道还有个好处是可以规避潜在的兼容性问题，以酷冷至尊
 MB520 机箱为例，如果你规划的风道包含在机箱顶部装一个 360
 水冷用于进风，你就会发现这款机箱只支持在前部安装 360
-水冷而机箱顶部并没有安装 360
-水冷的空间，这时你也许就会考虑换一个机箱。除此之外，请确认电源是否能完整的提供各个部件的供电，电源的功率和接口两个方面都应该满足要求。</p>
+冷排而机箱顶部并没有安装 360
+冷排的空间，这时你也许就会考虑换一个机箱。除此之外，请确认电源是否能完整的提供各个部件的供电，电源的功率和接口两个方面都应该满足要求。功率要求很好理解，接口要求主要是某些显卡需要
+3 个甚至 4 个 8-pin 供电接口，可能需要留意一下。</p>
 <p>如果自己拿不准，也可以到 <a
 target="_blank" rel="noopener" href="https://pcpartpicker.com/list/">pcpartpicker</a>
 上输入自己的配置单，网站会自动给出一个兼容性分析结果。</p>
