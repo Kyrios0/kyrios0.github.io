@@ -549,6 +549,9 @@ video {
 .min-w-3 {
   min-width: 0.75rem;
 }
+.max-w-lg {
+  max-width: 32rem;
+}
 .flex-1 {
   flex: 1 1 0%;
 }
