@@ -214,6 +214,27 @@
   </url>
   
   <url>
+    <loc>https://blog.kyrios.cn/tags/Toy/</loc>
+    <lastmod>2025-06-15</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.kyrios.cn/tags/Dev/</loc>
+    <lastmod>2025-06-15</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.kyrios.cn/tags/C/</loc>
+    <lastmod>2025-06-15</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://blog.kyrios.cn/tags/Writeup/</loc>
     <lastmod>2025-06-15</lastmod>
     <changefreq>daily</changefreq>
@@ -236,27 +257,6 @@
   
   <url>
     <loc>https://blog.kyrios.cn/tags/PWN/</loc>
-    <lastmod>2025-06-15</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.kyrios.cn/tags/Dev/</loc>
-    <lastmod>2025-06-15</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.kyrios.cn/tags/C/</loc>
-    <lastmod>2025-06-15</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.kyrios.cn/tags/Toy/</loc>
     <lastmod>2025-06-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
