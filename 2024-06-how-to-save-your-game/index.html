@@ -37,7 +37,7 @@
 <meta property="og:image" content="https://blog.kyrios.cn/2024-06-how-to-save-your-game/img/save_encrypt.png">
 <meta property="og:image" content="https://blog.kyrios.cn/2024-06-how-to-save-your-game/img/es3save.png">
 <meta property="article:published_time" content="2024-06-13T15:14:30.000Z">
-<meta property="article:modified_time" content="2024-06-14T07:49:41.840Z">
+<meta property="article:modified_time" content="2025-06-15T02:56:05.891Z">
 <meta property="article:author" content="Kyr1os">
 <meta property="article:tag" content="Reverse">
 <meta name="twitter:card" content="summary">
@@ -124,7 +124,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#cluckmech-oasis"><span class="nav-number">1.</span> <span class="nav-text">Cluckmech Oasis</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#what-we-have"><span class="nav-number">1.1.</span> <span class="nav-text">What we have</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#guess"><span class="nav-number">1.2.</span> <span class="nav-text">Guess</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#reverse"><span class="nav-number">1.3.</span> <span class="nav-text">Reverse</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#more"><span class="nav-number">2.</span> <span class="nav-text">More</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#links"><span class="nav-number">3.</span> <span class="nav-text">Links</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#cluckmech-oasis"><span class="nav-number">1.</span> <span class="nav-text">Cluckmech Oasis</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#what-we-have"><span class="nav-number">1.1.</span> <span class="nav-text">What we have</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#guess"><span class="nav-number">1.2.</span> <span class="nav-text">Guess</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#reverse"><span class="nav-number">1.3.</span> <span class="nav-text">Reverse</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#a-gm-game"><span class="nav-number">2.</span> <span class="nav-text">&lt;A GM Game&gt;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#more"><span class="nav-number">3.</span> <span class="nav-text">More</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#links"><span class="nav-number">4.</span> <span class="nav-text">Links</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -219,7 +219,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-06-14 15:49:41" itemprop="dateModified" datetime="2024-06-14T15:49:41+08:00">2024-06-14</time>
+      <time title="Modified: 2025-06-15 10:56:05" itemprop="dateModified" datetime="2025-06-15T10:56:05+08:00">2025-06-15</time>
     </span>
 
   
@@ -302,12 +302,52 @@ class="citation" data-cites="plusls">@plusls</span></a> told me that
 using <code>IDA</code> for <code>C#</code> reverse engineering is
 foolish and recommended <code>dotPeek</code> instead. Thanks to that
 advice, I found it much easier to view the code in <code>dotPeek</code>.
-I quickly discovered that the save files are encrypted using a library
-called <code>ES3 (Easy Save 3)</code>.</p>
+I quickly discovered that the save files are encrypted by AES (seems
+like ECB mode) using a library called
+<code>ES3 (Easy Save 3)</code>.</p>
 <p><img src="img/es3save.png" /></p>
 <p>With a <a target="_blank" rel="noopener" href="https://es3.lol/">parser</a> for <code>ES3</code>
 that I found online and the encryption key I found in <code>IDA</code>,
 I was able to get everything I needed.</p>
+<h2 id="a-gm-game">&lt;A GM Game&gt;</h2>
+<p>I found a game, let us call it <code>GM</code> here. Its save file
+looks encrypted or serialized. To figure its structure, I put it in
+<code>IDA</code> and found it is crafted with <code>GameMaker</code> and
+use <code>YYC</code> (YoYo Compiler). For the traditional
+<code>GameMaker</code> game, we have <a
+target="_blank" rel="noopener" href="https://github.com/UnderminersTeam/UndertaleModTool">UndertaleModTool</a>
+to decompile it. However <code>GM</code> used <code>YYC</code> which is
+not supported by all <code>GameMaker</code> decompile tool so far as I
+know. Another solution is using <a
+target="_blank" rel="noopener" href="https://github.com/AurieFramework/YYToolkit">YYToolkit</a> which
+working in runtime phase. I have validated that YYToolkit can obtain
+runtime info from <code>GM</code>. The next step is writing a mod for
+<code>GM</code> to hook some functions as we want. Here are some
+tutorial: https://www.youtube.com/watch?v=sK8Cv7W_qlY.</p>
+<p>I came across a game—let's refer to it as <code>GM</code>. Its save
+file appears to be either encrypted or serialized, so to understand its
+structure, I loaded the executable into <code>IDA</code>. I discovered
+that it's built with <code>GameMaker</code> and compiled using
+<code>YYC</code> (YoYo Compiler). For traditional GameMaker games, tools
+like <a
+target="_blank" rel="noopener" href="https://github.com/UnderminersTeam/UndertaleModTool"><code>UndertaleModTool</code></a>
+are available to decompile them. However, since <code>GM</code> uses
+<code>YYC</code>, it’s not supported by most existing GameMaker
+decompilers, <code>UndertaleModTool</code> also can not extract useful
+information from <code>data.win</code> like other <code>GameMaker</code>
+games. I spent some time to learned about <code>YYC</code>, it seems
+like not a easy work for reverse engineering:
+https://github.com/AurieFramework/YYToolkit/wiki/About-VM-and-YYC. An
+alternative approach is to use <a
+target="_blank" rel="noopener" href="https://github.com/AurieFramework/YYToolkit"><code>YYToolkit</code></a>,
+which operates at runtime. I’ve confirmed that <code>YYToolkit</code>
+can retrieve runtime information from GM. The next step is to write a
+mod for GM that hooks into specific functions we’re interested in. This
+video tutorial is a good starting point:
+https://www.youtube.com/watch?v=sK8Cv7W_qlY. Overall, it's been a fun
+journey exploring the inner workings of <code>GameMaker</code> and
+learning how <code>YYC</code> affects the reverse engineering
+process.</p>
 <h2 id="more">More</h2>
 <p>If I found new game with encrypted saving file, I may update
 here.</p>
@@ -316,6 +356,10 @@ here.</p>
 <p><a target="_blank" rel="noopener" href="https://docs.moodkie.com/easy-save-3">Easy Save 3</a></p>
 <p><a
 target="_blank" rel="noopener" href="https://github.com/alextusinean/es3-editor">es3-editor</a></p>
+<p><a
+target="_blank" rel="noopener" href="https://github.com/UnderminersTeam/UndertaleModTool">UndertaleModTool</a></p>
+<p><a
+target="_blank" rel="noopener" href="https://github.com/AurieFramework/YYToolkit">YYToolkit</a></p>
 
     </div>
 
@@ -357,7 +401,7 @@ target="_blank" rel="noopener" href="https://github.com/alextusinean/es3-editor"
 
   <div class="copyright">
     &copy; 2017 – 
-    <span itemprop="copyrightYear">2024</span>
+    <span itemprop="copyrightYear">2025</span>
     <span class="with-love">
       <i class="fa fa-keyboard"></i>
     </span>
