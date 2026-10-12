@@ -1,383 +1,83 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width">
-<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.1.1">
-
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
-  <link rel="mask-icon" href="/images/favicon/safari-pinned-tab.svg" color="#222">
-  <link rel="manifest" href="/images/favicon/site.webmanifest">
-
-<link rel="stylesheet" href="/css/tailwind.css">
-<link rel="stylesheet" href="/css/main.css">
-
-
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Vollkorn+SC:300,300italic,400,400italic,500,500italic,700,700italic%7CNoto+Sans+SC:300,300italic,400,400italic,500,500italic,700,700italic%7CNoto+Serif+SC:300,300italic,400,400italic,500,500italic,700,700italic&display=swap&subset=latin,latin-ext">
-
-<script src="https://kit.fontawesome.com/b2a94976e7.js"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.33/fancybox/fancybox.css" integrity="sha256-gkQVf8UKZgQ0HyuxL/VnacadJ+D2Kox2TCEBuNQg5+w=" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-minimal.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
-
-<script class="next-config" data-name="main" type="application/json">{"hostname":"blog.kyrios.cn","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.19.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
-
-    <meta name="description" content="那些年我们解过的压缩包系列，最近打 CTF 遇到了不少加密的压缩包，总结了一下攻击方式，感觉不外乎暴力破解、伪加密、明文攻击和 CRC32 攻击这几种。最近学了一下 CRC32 攻击，感觉思路比较清奇，做个笔记。">
-<meta property="og:type" content="article">
-<meta property="og:title" content="CRC32 碰撞攻击">
-<meta property="og:url" content="https://blog.kyrios.cn/2017-crc32-collision/">
-<meta property="og:site_name" content="Kyr1os&#39; Blog">
-<meta property="og:description" content="那些年我们解过的压缩包系列，最近打 CTF 遇到了不少加密的压缩包，总结了一下攻击方式，感觉不外乎暴力破解、伪加密、明文攻击和 CRC32 攻击这几种。最近学了一下 CRC32 攻击，感觉思路比较清奇，做个笔记。">
-<meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://blog.kyrios.cn/2017-crc32-collision/img/CRC00.jpg">
-<meta property="og:image" content="https://blog.kyrios.cn/2017-crc32-collision/img/CRC02.jpg">
-<meta property="og:image" content="https://blog.kyrios.cn/2017-crc32-collision/img/CRC03.jpg">
-<meta property="article:published_time" content="2017-05-25T10:33:53.000Z">
-<meta property="article:modified_time" content="2023-01-10T10:35:30.917Z">
-<meta property="article:author" content="Kyr1os">
-<meta property="article:tag" content="Misc">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://blog.kyrios.cn/2017-crc32-collision/img/CRC00.jpg">
-
-
-<link rel="canonical" href="https://blog.kyrios.cn/2017-crc32-collision/">
-
-
-
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://blog.kyrios.cn/2017-crc32-collision/","path":"2017-crc32-collision/","title":"CRC32 碰撞攻击"}</script>
-
-<script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>CRC32 碰撞攻击 | Kyr1os' Blog</title>
-  
-
-
-
-
-
-
-
-
-  <noscript>
-    <link rel="stylesheet" href="/css/noscript.css">
-  </noscript>
-</head>
-
-<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
-  <div class="headband"></div>
-
-  <main class="main">
-    <div class="column">
-      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
-  <div class="site-nav-toggle">
-    <div class="toggle" aria-label="Toggle navigation bar" role="button">
-        <span class="toggle-line"></span>
-        <span class="toggle-line"></span>
-        <span class="toggle-line"></span>
-    </div>
-  </div>
-
-  <div class="site-meta">
-
-    <a href="/" class="brand" rel="start">
-      <i class="logo-line"></i>
-      <p class="site-title">Kyr1os' Blog</p>
-      <i class="logo-line"></i>
-    </a>
-      <p class="site-subtitle" itemprop="description">May the wind guide your path</p>
-  </div>
-
-  <div class="site-nav-right">
-    <div class="toggle popup-trigger" aria-label="Search" role="button">
-    </div>
-  </div>
-</div>
-
-
-
-<nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-friends"><a href="/friends/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Friends</a></li>
-  </ul>
-</nav>
-
-
-
-
-</header>
-        
-  
-  <aside class="sidebar animated fadeInUp">
-
-    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
-      <ul class="sidebar-nav">
-        <li class="sidebar-nav-toc">
-          Table of Contents
-        </li>
-        <li class="sidebar-nav-overview">
-          Overview
-        </li>
-      </ul>
-
-      <div class="sidebar-panel-container">
-        <!--noindex-->
-        <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#x01-crc%E6%A6%82%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">0x01 CRC概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#x02-crc%E7%AE%97%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">0x02 CRC算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#x03-%E5%AE%9E%E4%BE%8B"><span class="nav-number">3.</span> <span class="nav-text">0x03 实例</span></a></li></ol></div>
-        </div>
-        <!--/noindex-->
-
-        <div class="site-overview-wrap sidebar-panel">
-          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <img class="site-author-image" itemprop="image" alt="Kyr1os"
-      src="/images/avatar.png">
-  <p class="site-author-name" itemprop="name">Kyr1os</p>
-  <div class="site-description" itemprop="description">Each day is a blessing</div>
-</div>
-<div class="site-state-wrap animated">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-        <a href="/archives/">
-          <span class="site-state-item-count">25</span>
-          <span class="site-state-item-name">posts</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-tags">
-          <a href="/tags/">
-        <span class="site-state-item-count">23</span>
-        <span class="site-state-item-name">tags</span></a>
-      </div>
-  </nav>
-</div>
-  <div class="links-of-author animated">
-      <span class="links-of-author-item">
-        <a href="https://github.com/kyrios0" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;kyrios0" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
-      </span>
-      <span class="links-of-author-item">
-        <a href="mailto:kyr1os@qq.com" title="E-Mail → mailto:kyr1os@qq.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
-      </span>
-      <span class="links-of-author-item">
-        <a href="https://osu.ppy.sh/users/11500292" title="OSU → https:&#x2F;&#x2F;osu.ppy.sh&#x2F;users&#x2F;11500292" rel="noopener me" target="_blank"><i class="fa fa-headphones fa-fw"></i>OSU</a>
-      </span>
-  </div>
-
-        </div>
-      </div>
-    </div>
-
-    
-  </aside>
-
-
-    </div>
-
-    <div class="main-inner post posts-expand">
-
-
-  
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://blog.kyrios.cn/2017-crc32-collision/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Kyr1os">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Kyr1os' Blog">
-      <meta itemprop="description" content="Each day is a blessing">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="CRC32 碰撞攻击 | Kyr1os' Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          CRC32 碰撞攻击
-        </h1>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2017-05-25 18:33:53" itemprop="dateCreated datePublished" datetime="2017-05-25T18:33:53+08:00">2017-05-25</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-01-10 18:35:30" itemprop="dateModified" datetime="2023-01-10T18:35:30+08:00">2023-01-10</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody"><hr />
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#120f1a"><title>CRC32 碰撞攻击 | Kyr1os&#39; Blog</title><meta name="description" content="那些年我们解过的压缩包系列，最近打 CTF 遇到了不少加密的压缩包，总结了一下攻击方式，感觉不外乎暴力破解、伪加密、明文攻击和 CRC32 攻击这几种。最近学了一下 CRC32 攻击，感觉思路比较清奇，做个笔记。"><meta name="author" content="Kyr1os"><link rel="canonical" href="https://blog.kyrios.cn/2017-crc32-collision/"><meta property="og:type" content="website"><meta property="og:title" content="CRC32 碰撞攻击"><meta property="og:description" content="那些年我们解过的压缩包系列，最近打 CTF 遇到了不少加密的压缩包，总结了一下攻击方式，感觉不外乎暴力破解、伪加密、明文攻击和 CRC32 攻击这几种。最近学了一下 CRC32 攻击，感觉思路比较清奇，做个笔记。"><meta property="og:url" content="https://blog.kyrios.cn/2017-crc32-collision/"><meta property="og:site_name" content="Kyr1os' Blog"><meta property="og:image" content="https://blog.kyrios.cn/_astro/CRC00.DX2oAf4b_Z2nXEIc.webp"><link rel="icon" href="/images/favicon/favicon.ico" sizes="any"><link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png"><link rel="apple-touch-icon" href="/images/favicon/apple-touch-icon.png"><link rel="alternate" type="application/rss+xml" title="Kyr1os' Blog" href="/rss.xml"><link rel="sitemap" href="/sitemap-index.xml"><script>
+      // Screen transitions (cross-document View Transitions, styled in global.css), after osu!'s
+      // screen stack: going deeper (home > lists > a post) pushes forward, going up comes back.
+      // Must run before first paint, so it lives inline in <head>.
+      (() => {
+        const depth = (url) => {
+          const path = new URL(url, location.href).pathname;
+          if (path === '/') return 0;
+          return /^\/(posts|tags|archives|friends|about)(\/|$)/.test(path) ? 1 : 2;
+        };
+        // "forward"/"back", plus "from-menu" when leaving the start screen
+        const types = () => {
+          let from = window.navigation?.activation?.from?.url;
+          if (from === undefined && document.referrer.startsWith(location.origin + '/')) from = document.referrer;
+          if (!from) return [];
+          const a = depth(from);
+          const b = depth(location.href);
+          if (b === a) return [];
+          return b > a ? (a === 0 ? ['forward', 'from-menu'] : ['forward']) : ['back'];
+        };
+        document.documentElement.dataset.nav = types()[0] ?? '';
+        addEventListener('pagereveal', (e) => {
+          const list = types();
+          document.documentElement.dataset.nav = list[0] ?? '';
+          if (e.viewTransition) list.forEach((t) => e.viewTransition.types.add(t));
+        });
+      })();
+    </script><link rel="stylesheet" href="/_astro/_slug_.DeHO_b6D.css"><link rel="stylesheet" href="/_astro/BaseLayout.A0bCzu26.css"></head><body class="min-h-dvh"><div class="pointer-events-none fixed inset-0 -z-10 bg-[radial-gradient(90%_60%_at_80%_0%,rgb(255_79_163/0.12)_0%,transparent_60%)]" data-parallax="0.02" style="translate: var(--plx-x, 0px) var(--plx-y, 0px)" aria-hidden="true"></div><div aria-hidden="true" data-triangles="0.9" data-velocity="0.6" data-parallax="0.01" style="translate: var(--plx-x, 0px) var(--plx-y, 0px)" class="pointer-events-none absolute inset-0 overflow-hidden fixed -z-10"></div><div class="absolute inset-x-0 top-0 z-20 flex flex-wrap items-center justify-between gap-3 pt-5 md:gap-4 md:pr-9"><a href="/posts/" class="osu-back osu-press osu-flash ml-3 !w-auto px-6"><span class="osu-unskew inline-flex items-center gap-2.5"><svg aria-hidden="true" class="size-4.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"></path></svg>All posts</span><span class="osu-flash-layer" aria-hidden="true"></span></a><nav aria-label="Site" class="flex w-full gap-2 overflow-x-auto pl-4 [scrollbar-width:none] md:w-auto md:pl-0"><a href="/posts/" class="inline-flex h-11 flex-none items-center rounded-full px-4 font-medium backdrop-blur transition-colors md:px-4.5 bg-ground/60 text-ink hover:bg-white/14">Posts</a><a href="/archives/" class="inline-flex h-11 flex-none items-center rounded-full px-4 font-medium backdrop-blur transition-colors md:px-4.5 bg-ground/60 text-ink hover:bg-white/14">Archives</a><a href="/tags/" class="inline-flex h-11 flex-none items-center rounded-full px-4 font-medium backdrop-blur transition-colors md:px-4.5 bg-ground/60 text-ink hover:bg-white/14">Tags</a><a href="/friends/" class="inline-flex h-11 flex-none items-center rounded-full px-4 font-medium backdrop-blur transition-colors md:px-4.5 bg-ground/60 text-ink hover:bg-white/14">Friends</a><a href="/about/" class="inline-flex h-11 flex-none items-center rounded-full px-4 font-medium backdrop-blur transition-colors md:px-4.5 bg-ground/60 text-ink hover:bg-white/14">About</a></nav></div><main><div class="reading-progress fixed inset-x-0 top-0 z-30 h-1 bg-white/6" aria-hidden="true" data-astro-cid-z7xolria><div class="h-full w-full origin-left scale-x-0 bg-accent shadow-[0_0_12px_var(--color-accent)]" data-progress data-astro-cid-z7xolria></div></div><header class="relative flex min-h-[480px] flex-col justify-end overflow-hidden" data-astro-cid-z7xolria><div aria-hidden="true" class="absolute inset-0 bg-cover bg-center" style="background-image:url(/_astro/CRC00.DX2oAf4b_Z2nXEIc.webp);background-position:center" data-astro-cid-z7xolria></div><div aria-hidden="true" class="absolute inset-0 bg-linear-to-b from-ground/55 via-ground/35 to-ground" data-astro-cid-z7xolria></div><div aria-hidden="true" data-triangles="0.6" data-velocity="0.6" class="pointer-events-none absolute inset-0 overflow-hidden"></div><div class="relative mx-auto flex w-full max-w-7xl flex-wrap items-end justify-between gap-7 px-4 pt-36 pb-8 md:px-9 md:pt-32" data-astro-cid-z7xolria><div class="min-w-0 flex-[1_1_560px] animate-[rise_0.5s_var(--ease-out-back)_both]" data-astro-cid-z7xolria><div class="flex items-center gap-2.5" data-astro-cid-z7xolria><span class="inline-flex h-5.5 items-center rounded-full px-2.5 text-xs font-bold tracking-wider text-ground uppercase" style="background:#b9b4d6" data-astro-cid-z7xolria>Misc</span><span class="text-sm font-medium text-soft" data-astro-cid-z7xolria>中文</span></div><h1 class="mt-2.5 text-4xl leading-[1.08] font-semibold tracking-tight md:text-[54px]" data-astro-cid-z7xolria>CRC32 碰撞攻击</h1><div class="mt-3.5 flex flex-wrap items-center gap-x-5 gap-y-3 text-lg font-medium text-[#e9e4f5]" data-astro-cid-z7xolria><span data-astro-cid-z7xolria>Kyr1os</span><time datetime="2017-05-25T18:33:53.000Z" data-astro-cid-z7xolria>2017-05-25</time><span class="inline-flex h-6.5 items-center rounded-full px-3 text-[15px] font-bold text-ground" style="background:rgb(79,255,213)" data-astro-cid-z7xolria>3 min read</span><span class="flex flex-wrap gap-1.5" data-astro-cid-z7xolria><a href="/tags/Misc/" class="inline-flex h-6.5 items-center rounded-full px-2.5 text-sm font-bold text-ground transition-transform hover:-translate-y-0.5" style="background:#b9b4d6" data-astro-cid-z7xolria>Misc</a></span></div></div><dl class="grid flex-[0_1_420px] animate-[rise_0.5s_0.1s_var(--ease-out-back)_both] grid-cols-4 gap-4 rounded-xl bg-ground/72 px-4.5 py-4" data-astro-cid-z7xolria><div data-astro-cid-z7xolria><div class="h-[3px] overflow-hidden rounded-sm bg-white/12" data-astro-cid-z7xolria><div class="h-full origin-left animate-[grow_0.8s_0.2s_var(--ease-out-back)_both] rounded-sm" style="width:25%;background:#ff9ad5" data-astro-cid-z7xolria></div></div><dt class="mt-1.5 text-[13px] font-medium text-muted" data-astro-cid-z7xolria>Sections</dt><dd class="text-lg font-medium" data-astro-cid-z7xolria>3</dd></div><div data-astro-cid-z7xolria><div class="h-[3px] overflow-hidden rounded-sm bg-white/12" data-astro-cid-z7xolria><div class="h-full origin-left animate-[grow_0.8s_0.2s_var(--ease-out-back)_both] rounded-sm" style="width:20%;background:#5cc8ff" data-astro-cid-z7xolria></div></div><dt class="mt-1.5 text-[13px] font-medium text-muted" data-astro-cid-z7xolria>Images</dt><dd class="text-lg font-medium" data-astro-cid-z7xolria>4</dd></div><div data-astro-cid-z7xolria><div class="h-[3px] overflow-hidden rounded-sm bg-white/12" data-astro-cid-z7xolria><div class="h-full origin-left animate-[grow_0.8s_0.2s_var(--ease-out-back)_both] rounded-sm" style="width:7%;background:#ffd84d" data-astro-cid-z7xolria></div></div><dt class="mt-1.5 text-[13px] font-medium text-muted" data-astro-cid-z7xolria>Code</dt><dd class="text-lg font-medium" data-astro-cid-z7xolria>1</dd></div><div data-astro-cid-z7xolria><div class="h-[3px] overflow-hidden rounded-sm bg-white/12" data-astro-cid-z7xolria><div class="h-full origin-left animate-[grow_0.8s_0.2s_var(--ease-out-back)_both] rounded-sm" style="width:25%;background:rgb(79,255,213)" data-astro-cid-z7xolria></div></div><dt class="mt-1.5 text-[13px] font-medium text-muted" data-astro-cid-z7xolria>Read time</dt><dd class="text-lg font-medium" data-astro-cid-z7xolria>3 min</dd></div></dl></div></header><div class="mx-auto flex max-w-6xl flex-wrap gap-10 px-4 pt-9 md:px-9" data-astro-cid-z7xolria><aside aria-label="Contents" class="hidden flex-[1_1_260px] lg:block lg:max-w-[300px]" data-astro-cid-z7xolria><div class="pb-scroll sticky top-6 max-h-[calc(100dvh-48px)] overflow-x-hidden overflow-y-auto pr-2 pb-4" data-astro-cid-z7xolria><p class="mb-3 text-sm font-bold tracking-widest text-muted uppercase" data-astro-cid-z7xolria>Contents</p><ol class="flex flex-col gap-2" data-toc data-astro-cid-z7xolria><li class="flex items-center gap-2.5" data-astro-cid-z7xolria><span class="toc-num w-10 flex-none text-right font-semibold tabular-nums transition-colors" data-astro-cid-z7xolria>1</span><a href="#0x01-crc概述" data-target="0x01-crc概述" class="toc-row flex min-h-[46px] min-w-0 flex-1 items-center overflow-hidden rounded-[9px] bg-panel/90" data-astro-cid-z7xolria><span class="min-w-0 flex-1 px-3.5 py-2 leading-snug font-medium" data-astro-cid-z7xolria>0x01 CRC概述</span></a></li><li class="flex items-center gap-2.5" data-astro-cid-z7xolria><span class="toc-num w-10 flex-none text-right font-semibold tabular-nums transition-colors" data-astro-cid-z7xolria>2</span><a href="#0x02-crc算法" data-target="0x02-crc算法" class="toc-row flex min-h-[46px] min-w-0 flex-1 items-center overflow-hidden rounded-[9px] bg-panel/90" data-astro-cid-z7xolria><span class="min-w-0 flex-1 px-3.5 py-2 leading-snug font-medium" data-astro-cid-z7xolria>0x02 CRC算法</span></a></li><li class="flex items-center gap-2.5" data-astro-cid-z7xolria><span class="toc-num w-10 flex-none text-right font-semibold tabular-nums transition-colors" data-astro-cid-z7xolria>3</span><a href="#0x03-实例" data-target="0x03-实例" class="toc-row flex min-h-[46px] min-w-0 flex-1 items-center overflow-hidden rounded-[9px] bg-panel/90" data-astro-cid-z7xolria><span class="min-w-0 flex-1 px-3.5 py-2 leading-snug font-medium" data-astro-cid-z7xolria>0x03 实例</span></a></li></ol></div></aside><article class="min-w-0 flex-[999_1_560px] rounded-2xl bg-[#1a1624] px-5 py-8 md:px-12 md:py-10" data-astro-cid-z7xolria><div class="prose-blog" data-astro-cid-z7xolria><hr>
 <center>
-那些年我们解过的压缩包系列，最近打 CTF
-遇到了不少加密的压缩包，总结了一下攻击方式，感觉不外乎<strong>暴力破解、伪加密、明文攻击和
-CRC32 攻击</strong>这几种。最近学了一下 CRC32
-攻击，感觉思路比较清奇，做个笔记。
+那些年我们解过的压缩包系列，最近打 CTF 遇到了不少加密的压缩包，总结了一下攻击方式，感觉不外乎**暴力破解、伪加密、明文攻击和 CRC32 攻击**这几种。最近学了一下 CRC32 攻击，感觉思路比较清奇，做个笔记。
 </center>
-<hr />
-<h2 id="x01-crc概述">0x01 CRC概述</h2>
-<p>循环冗余校验（Cyclic redundancy
-check，通称“CRC”）是一种根据网络数据包或电脑文件等数据产生简短固定位数校验码的一种散列函数，主要用来检测或校验数据传输或者保存后可能出现的错误。
-我们熟知的 MD5 其实可以看做一个强化版的 CRC128，只不过由于 CRC
-多项式是线性结构，很容易通过改变数据方式达到 CRC
-碰撞，相对于具有强离散性的 MD5，CRC 的安全性差了很多，这点之后再提。</p>
-<hr />
-<h2 id="x02-crc算法">0x02 CRC算法</h2>
-<p>CRC 算法的数学基础是 GF(2) 多项式算术。 CRC
-算法的过程就是把需要进行校验的数据选定一个除数进行一次除法运算，称为模 2
-除法，跟通常二进制除法规则不同，得到的余数作为循环冗余码。数据接收端接收到数据之后进行同样的运算，即可判断数据在传输过程中是否出现了变化。
-举一个例子 要传输的数据为：1101011011 除数设为：10011
-在计算前先将原始数据后面填上 4 个 0：11010110110000 下面是计算过程
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">11010110110000</span><br><span class="line">10011</span><br><span class="line">-----xor</span><br><span class="line">01001110110000</span><br><span class="line"> 10011</span><br><span class="line"> -----xor</span><br><span class="line"> 0000010110000</span><br><span class="line">      10011</span><br><span class="line">	  -----xor</span><br><span class="line">	  00101000</span><br><span class="line">	    10011</span><br><span class="line">		-----xor</span><br><span class="line">		001110</span><br><span class="line">		  ----answer</span><br></pre></td></tr></table></figure> 其结果为1110
-在上例中，除数是一个固定的值，称为“生成多项式”。根据标准，CRC-X
-的生成多项式应该为一个 X+1 二进制位的数。在计算之前需要将传输数据左移 X
-位。 实际上，真正的 CRC
-计算通常与上面描述的还有些出入。这是因为这种最基本的 CRC
-除法有个很明显的缺陷，就是数据流的开头添加一些 0
-并不影响最后校验字的结果。这个问题很让人恼火啊，因此真正应用的 CRC
-算法基本都在原始的 CRC 算法的基础上做了些小的改动。
+<hr>
+<h2 id="0x01-crc概述">0x01 CRC概述</h2>
+<p>循环冗余校验（Cyclic redundancy check，通称“CRC”）是一种根据网络数据包或电脑文件等数据产生简短固定位数校验码的一种散列函数，主要用来检测或校验数据传输或者保存后可能出现的错误。
+我们熟知的 MD5 其实可以看做一个强化版的 CRC128，只不过由于 CRC 多项式是线性结构，很容易通过改变数据方式达到 CRC 碰撞，相对于具有强离散性的 MD5，CRC 的安全性差了很多，这点之后再提。</p>
+<hr>
+<h2 id="0x02-crc算法">0x02 CRC算法</h2>
+<p>CRC 算法的数学基础是 GF(2) 多项式算术。
+CRC 算法的过程就是把需要进行校验的数据选定一个除数进行一次除法运算，称为模 2 除法，跟通常二进制除法规则不同，得到的余数作为循环冗余码。数据接收端接收到数据之后进行同样的运算，即可判断数据在传输过程中是否出现了变化。
+举一个例子
+要传输的数据为：1101011011
+除数设为：10011
+在计算前先将原始数据后面填上 4 个 0：11010110110000
+下面是计算过程</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>11010110110000</span></span>
+<span class="line"><span>10011</span></span>
+<span class="line"><span>-----xor</span></span>
+<span class="line"><span>01001110110000</span></span>
+<span class="line"><span> 10011</span></span>
+<span class="line"><span> -----xor</span></span>
+<span class="line"><span> 0000010110000</span></span>
+<span class="line"><span>      10011</span></span>
+<span class="line"><span>	  -----xor</span></span>
+<span class="line"><span>	  00101000</span></span>
+<span class="line"><span>	    10011</span></span>
+<span class="line"><span>		-----xor</span></span>
+<span class="line"><span>		001110</span></span>
+<span class="line"><span>		  ----answer</span></span></code></pre>
+<p>其结果为1110
+在上例中，除数是一个固定的值，称为“生成多项式”。根据标准，CRC-X 的生成多项式应该为一个 X+1 二进制位的数。在计算之前需要将传输数据左移 X 位。
+实际上，真正的 CRC 计算通常与上面描述的还有些出入。这是因为这种最基本的 CRC 除法有个很明显的缺陷，就是数据流的开头添加一些 0 并不影响最后校验字的结果。这个问题很让人恼火啊，因此真正应用的 CRC 算法基本都在原始的 CRC 算法的基础上做了些小的改动。
 所谓的改动，也就是增加了两个概念，第一个是“余数初始值”，第二个是“结果异或值”。
-所谓的“余数初始值”就是在计算 CRC 值的开始，给 CRC
-寄存器一个初始值。“结果异或值”是在其余计算完成后将 CRC
-寄存器的值在与这个值进行一下异或操作作为最后的校验值。 常用的参数：</p>
+所谓的“余数初始值”就是在计算 CRC 值的开始，给 CRC 寄存器一个初始值。“结果异或值”是在其余计算完成后将 CRC 寄存器的值在与这个值进行一下异或操作作为最后的校验值。
+常用的参数：</p>
 <ul>
-<li><p>生成多项式 CRC-16：0x8005 CRC-32：0x04C11DB7</p></li>
-<li><p>余数初始值和结果异或值 CRC-16：0x0000; 0x0000 CRC-32：0xFFFFFFFF;
-0xFFFFFFFF</p></li>
+<li>
+<p>生成多项式
+CRC-16：0x8005
+CRC-32：0x04C11DB7</p>
+</li>
+<li>
+<p>余数初始值和结果异或值
+CRC-16：0x0000; 0x0000
+CRC-32：0xFFFFFFFF; 0xFFFFFFFF</p>
+</li>
 </ul>
-<hr />
-<h2 id="x03-实例">0x03 实例</h2>
+<hr>
+<h2 id="0x03-实例">0x03 实例</h2>
 <p>网上看到的一个题</p>
-<p><img src="img/CRC00.jpg" /></p>
-<p>有四个加密的文件，其中三个是短文档，只有 6 位，那我们可以选择 CRC32
-碰撞，在网上找了个脚本跑了一下</p>
-<p><img src="img/CRC02.jpg" /><img src="img/CRC03.jpg" /><img
-src="img/CRC04.jpg" /></p>
-<p>可以看到三个图中有可疑字符串，将它们拼起来得到 **_CRC32_i5_n0t_s4f3**
-这其实就还原了 txt
-中的内容，可以用这个做密码解密压缩包，进入本题的下一步。</p>
-
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-          <div class="post-tags">
-              <a href="/tags/Misc/" rel="tag"><i class="fa fa-tag"></i> Misc</a>
-          </div>
-
-        
-
-          <div class="post-nav">
-            <div class="post-nav-item">
-                <a href="/2017-ccpp-coursework/" rel="prev" title="Touhou 开发手记">
-                  <i class="fa fa-angle-left"></i> Touhou 开发手记
-                </a>
-            </div>
-            <div class="post-nav-item">
-                <a href="/2017-aes-cbc-byte-flipping-attack/" rel="next" title="AES CBC 字节翻转攻击">
-                  AES CBC 字节翻转攻击 <i class="fa fa-angle-right"></i>
-                </a>
-            </div>
-          </div>
-    </footer>
-  </article>
-</div>
-
-
-
-
-
-
-    <div class="comments gitalk-container"></div>
-</div>
-  </main>
-
-  <footer class="footer">
-    <div class="footer-inner">
-
-  <div class="copyright">
-    &copy; 2017 – 
-    <span itemprop="copyrightYear">2026</span>
-    <span class="with-love">
-      <i class="fa fa-keyboard"></i>
-    </span>
-    <span class="author" itemprop="copyrightHolder">Kyr1os</span>
-  </div>
-  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a>
-  </div>
-
-    </div>
-  </footer>
-
-  
-  <div class="back-to-top" role="button" aria-label="Back to top">
-    <i class="fa fa-arrow-up fa-lg"></i>
-    <span>0%</span>
-  </div>
-  <div class="reading-progress-bar"></div>
-
-  <a href="https://github.com/kyrios0" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
-
-<noscript>
-  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
-</noscript>
-
-
-  
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.33/fancybox/fancybox.umd.js" integrity="sha256-+2+qOqR8CKoHh/AsVR9k2qaDBKWjYNC2nozhYmv5j9k=" crossorigin="anonymous"></script>
-<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
-
-  
-
-
-
-  <script src="/js/third-party/fancybox.js"></script>
-
-  <script src="/js/third-party/pace.js"></script>
-
-
-  
-
-
-
-
-  
-
-  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","mhchem":false,"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
-<script src="/js/third-party/math/mathjax.js"></script>
-
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
-
-<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"kyrios0","repo":"kyrios0.github.io","client_id":"6cd5e006f4344b4ef21b","client_secret":"ee2b76bf152d51927924c4699df0df26805c9aab","admin_user":"kyrios0","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":null,"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.min.js","integrity":"sha256-MVK9MGD/XJaGyIghSVrONSnoXoGh3IFxLw0zfvzpxR4="},"path_md5":"94168300032d35692441b3127268f658"}</script>
-<script src="/js/third-party/comments/gitalk.js"></script>
-
-</body>
-</html>
+<p><img alt="" loading="lazy" decoding="async" width="798" height="508" src="/_astro/CRC00.DX2oAf4b_ZNTlsG.webp"></p>
+<p>有四个加密的文件，其中三个是短文档，只有 6 位，那我们可以选择 CRC32 碰撞，在网上找了个脚本跑了一下</p>
+<p><img alt="" loading="lazy" decoding="async" width="388" height="422" src="/_astro/CRC02.CZdqFhw7_1IUI6W.webp"><img alt="" loading="lazy" decoding="async" width="388" height="371" src="/_astro/CRC03.Bg76xiSB_Ze6w9p.webp"><img alt="" loading="lazy" decoding="async" width="386" height="284" src="/_astro/CRC04.ba_GGwfz_Z2soQvh.webp"></p>
+<p>可以看到三个图中有可疑字符串，将它们拼起来得到 <strong>_CRC32_i5_n0t_s4f3</strong> 这其实就还原了 txt 中的内容，可以用这个做密码解密压缩包，进入本题的下一步。</p></div></article></div><div class="mx-auto mt-10 flex max-w-6xl flex-wrap gap-10 px-4 md:px-9" data-astro-cid-z7xolria><div class="hidden flex-[1_1_260px] lg:block lg:max-w-[300px]" data-astro-cid-z7xolria></div><div class="flex min-w-0 flex-[999_1_560px] flex-col gap-7" data-astro-cid-z7xolria><nav aria-label="More posts" class="grid gap-4 sm:grid-cols-2" data-astro-cid-z7xolria><a href="/2017-ccpp-coursework/" class="post-card group relative flex h-[100px] items-center overflow-hidden rounded-xl bg-panel shadow-[0_4px_16px_rgb(0_0_0/0.3)] transition-[translate] duration-250 ease-out-back hover:-translate-x-2"><span aria-hidden="true" class="absolute inset-y-0 right-0 left-[30%] bg-cover bg-center transition-[filter] group-hover:brightness-125" style="background-image:url(/_astro/sfml_th201.D-zmgtXy_ZivvE6.webp);background-position:center"></span><span aria-hidden="true" class="absolute inset-0 bg-linear-to-r from-panel from-30% via-panel/55 to-panel/15"></span><span aria-hidden="true" class="absolute inset-y-0 left-0 w-1.5 transition-[width] duration-250 group-hover:w-3" style="background:#3ee0cf"></span><span class="relative flex min-w-0 flex-col gap-1 pr-4 pl-6"><span class="text-xs font-bold tracking-widest text-muted uppercase">Older</span><span class="truncate text-xl font-semibold">Touhou 开发手记</span><span class="text-[15px] font-medium text-soft">2017-05-15 · 7 min · Dev, C++</span></span></a><a href="/2017-aes-cbc-byte-flipping-attack/" class="post-card group relative flex h-[100px] items-center overflow-hidden rounded-xl bg-panel shadow-[0_4px_16px_rgb(0_0_0/0.3)] transition-[translate] duration-250 ease-out-back hover:-translate-x-2 sm:col-start-2"><span aria-hidden="true" class="absolute inset-y-0 right-0 left-[30%] bg-cover bg-center transition-[filter] group-hover:brightness-125" style="background-image:url(/_astro/CBC_encryption.B5gvhqE9_2stEAk.webp);background-position:center"></span><span aria-hidden="true" class="absolute inset-0 bg-linear-to-r from-panel from-30% via-panel/55 to-panel/15"></span><span aria-hidden="true" class="absolute inset-y-0 left-0 w-1.5 transition-[width] duration-250 group-hover:w-3" style="background:#ffb347"></span><span class="relative flex min-w-0 flex-col gap-1 pr-4 pl-6"><span class="text-xs font-bold tracking-widest text-muted uppercase">Newer</span><span class="truncate text-xl font-semibold">AES CBC 字节翻转攻击</span><span class="text-[15px] font-medium text-soft">2017-05-26 · 2 min · Crypto, AES</span></span></a></nav><script type="module">var e=document.getElementById(`giscus`);if(e){let t=document.createElement(`script`);t.src=`https://giscus.app/client.js`,t.async=!0,t.crossOrigin=`anonymous`,Object.entries({repo:e.dataset.repo,repoId:e.dataset.repoId,category:e.dataset.category,categoryId:e.dataset.categoryId,mapping:`pathname`,strict:`0`,reactionsEnabled:`1`,emitMetadata:`0`,inputPosition:`top`,theme:`transparent_dark`,lang:`en`,loading:`lazy`}).forEach(([e,n])=>{t.dataset[e]=n}),e.append(t)}</script></div></div></main><footer class="mt-20 border-t border-white/6"><div class="mx-auto flex max-w-6xl flex-wrap items-center gap-x-5 gap-y-2 px-4 py-7 text-muted md:px-9"><span class="mr-auto">© 2017–2026 Kyr1os · May the wind guide your path</span><a href="https://github.com/kyrios0" class="text-soft hover:text-accent">GitHub</a><a href="mailto:kyr1os@qq.com" class="text-soft hover:text-accent">E-Mail</a><a href="https://osu.ppy.sh/users/11500292" class="text-soft hover:text-accent">osu!</a><a href="/rss.xml" class="text-soft hover:text-accent">RSS</a></div></footer><script type="module" src="/_astro/BaseLayout.astro_astro_type_script_index_0_lang.Bz7nKinM.js"></script></body></html><script type="module">var e=document.querySelector(`[data-progress]`),t=document.querySelector(`article`);if(e&&t){let n=!1,r=()=>{n=!1;let r=t.getBoundingClientRect(),i=r.height-innerHeight,a=i>0?Math.min(1,Math.max(0,-r.top/i)):1;e.style.transform=`scaleX(${a})`};addEventListener(`scroll`,()=>{n||(n=!0,requestAnimationFrame(r))},{passive:!0}),r()}var n=[...document.querySelectorAll(`[data-toc] a[data-target]`)];if(n.length){let e=new Map(n.map(e=>[e.dataset.target,e.closest(`li`)])),t=n.map(e=>document.getElementById(e.dataset.target)).filter(e=>!!e),r=t=>e.forEach((e,n)=>e.classList.toggle(`is-active`,n===t)),i=()=>{let e=t[0]?.id;for(let n of t)n.getBoundingClientRect().top<140&&(e=n.id);e&&r(e)};addEventListener(`scroll`,i,{passive:!0}),i()}</script>
