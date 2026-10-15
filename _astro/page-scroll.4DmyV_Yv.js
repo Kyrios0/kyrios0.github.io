@@ -1,0 +1,1 @@
+import{t as e}from"./smooth-scroll.z4_WeAW0.js";var t=e(document.scrollingElement);export{t};
